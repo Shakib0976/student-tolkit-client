@@ -1,9 +1,11 @@
 import { AlarmClock, BookOpenText, CalendarDays, DollarSign, House, Menu, Moon, NotebookPen, X } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [show, setShow] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
 
     const navLinks = [
         { icon: <House size={18} />, name: "Home", path: "/" },
@@ -14,21 +16,39 @@ const Navbar = () => {
         { icon: <AlarmClock size={18} />, name: "Focus Timer", path: "/timer" },
     ];
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY < 50) {
+                // At the top
+                setShow(true);
+            } else if (window.scrollY > lastScrollY) {
+                // Scrolling down
+                setShow(false);
+            } else {
+                // Scrolling up
+                setShow(true);
+            }
+            setLastScrollY(window.scrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
+
     return (
-        <div className="pt-5 w-11/12 mx-auto">
-            <nav className="bg-white text-black px-6 py-3 shadow-md rounded-2xl">
+        <div className={`sticky top-0 z-50 pt-5 w-11/12 mx-auto transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}`}>
+            <nav className="bg-white text-black px-6 py-3 shadow-md rounded-2xl transition-all duration-300">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-1">
                         <img
-                            src="https://i.ibb.co.com/k61dyNH8/Screenshot-2025-09-02-131938-removebg-preview.png"
+                            src="https://i.ibb.co/k61dyNH8/Screenshot-2025-09-02-131938-removebg-preview.png"
                             alt="Logo"
-                            className="h-16 w-auto"
+                            className="md:h-16 h-10 w-auto"
                         />
-                       
                     </Link>
 
-                    {/* Desktop Nav (centered) */}
+                    {/* Desktop Nav */}
                     <div className="hidden lg:flex items-center space-x-6 mx-auto">
                         {navLinks.map((link) => (
                             <NavLink

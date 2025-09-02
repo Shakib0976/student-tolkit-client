@@ -15,7 +15,7 @@ const Footer = () => {
                                 className="h-25 w-auto"
                             />
                         </div>
-                        <div className='my-5'>
+                        <div className='my-5 '>
                             <p className=''> Student Life Toolkit helps you organize your schedule, <br /> manage your budget,
                                 plan study goals, and prepare for exams , <br />  all in one place. </p>
                         </div>
