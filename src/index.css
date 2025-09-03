@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap'); */
+
+
+
+
+/* .rubik-font {
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+} */
+
+
+
+body {
+    background-color: #F8F7FD;
+    font-family: "Archivo", sans-serif;
+    font-optical-sizing: auto;
+    /* font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto; */
+}
+
+
+/* Navlink active button style */
+
+.active {
+
+    font-weight: bold;
+    color: #9333ea;
+    /* Neon cyan */
+    background: transparent;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    border-radius: 0 0 40px 40px;
+    /* Curved underline */
+    background: #9333ea;
+    /* Neon cyan */
+
+    /* Glow effect */
+}
