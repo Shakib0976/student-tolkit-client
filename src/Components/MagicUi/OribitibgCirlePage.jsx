@@ -12,7 +12,7 @@ import time from '../../assets/time-passing.png'
 
 const OrbitingCirclesDemo = () => {
     return (
-        <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden bg-gray-50">
+        <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden ">
             {/* Outer Orbit */}
             <OrbitingCircle iconSize={40} radius={190} speed={40}>
                 <img className="h-5" src={calender} alt="" />

@@ -9,8 +9,8 @@ import AvatarCirclesDemo from '../../../Components/MagicUi/AvatarCircleDemo';
 const Banner = () => {
     //  <FcBusinessman size={20} />
     return (
-        <section className="relative overflow-hidden">
-            <div className="max-w-11/12 h-screen py-10 mx-auto lg:grid lg:grid-cols-2 lg:gap-12">
+        <section className="relative banner overflow-hidden">
+            <div className="max-w-11/12 px-5 md:px-10 lg:px-15 py-10 md:py-20  mx-auto lg:grid lg:grid-cols-2 lg:gap-12">
 
                 {/* Left Content */}
                 <motion.div
