@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     FaCalendarAlt,
     FaWallet,
@@ -8,6 +8,8 @@ import {
     FaClock,
 } from "react-icons/fa";
 import { Link } from "react-router";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 // this is feature highlight section card 
 
@@ -64,8 +66,18 @@ const features = [
 // FeatureHighlights Card Component
 
 const FeatureHighlights = () => {
+
+    // aos annimation   
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: false, // if true, animation happens only once
+        });
+    }, []);
+
     return (
-        <section className="py-16 md:mt-20  mt-10 bg-gray-50">
+        <section className="py-16 md:mt-20  mt-10 bg-gradient-to-r from-purple-50 to-blue-50">
             <div className="container w-11/12 mx-auto px-6">
                 <h2 className="text-3xl font-bold mb-4 text-center">
                     🏆 Feature Highlights
@@ -77,6 +89,7 @@ const FeatureHighlights = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {features.map((feature, index) => (
                         <div
+                            data-aos="fade-up"
                             key={index}
                             className="relative bg-white py-6 px-6 rounded-3xl shadow-lg hover:shadow-2xl transition"
                         >
