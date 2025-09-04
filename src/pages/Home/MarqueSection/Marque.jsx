@@ -16,18 +16,14 @@ const Marque = () => {
     ];
 
     return (
-        <div className="bg-gray-50 py-8 rounded-2xl shadow-md max-w-7xl mx-auto">
+        <div className="bg-gray-50 py-10  md:py-20 mt-10 mx-5 mb-20 rounded-2xl px-6 text-center shadow-md max-w-7xl md:mx-auto">
             {/* page title */}
-            <div className="flex mt-15 items-center justify-center gap-2 mb-4">
-                <Star className="w-8 h-8 text-yellow-500" />
-                <h1 className="text-3xl font-bold text-gray-800">
-                    Explore Our Featured Highlights
-                </h1>
-            </div>
+            <h1 className="text-2xl sm:text-3xl md:text-3xl  font-bold mb-4 flex items-center gap-2 justify-center">
+                <Star className="w-8 h-8 hidden md:block text-yellow-500  " />  Explore Our Featured Highlights
+            </h1>
             {/* Page Description */}
-            <p className="text-gray-600 md:mb-20 mb-12 text-center">
-                Discover some of the most inspiring visuals and concepts we’ve handpicked
-                for you.
+            <p className="text-gray-600 text-center  text-base  md:text-lg mb-10 md:mb-20 px-4 md:px-0 max-w-3xl  mx-auto">
+                Discover some of the most inspiring visuals and concepts we’ve handpicked for you.
             </p>
 
             {/* use react marquee for feature show  */}

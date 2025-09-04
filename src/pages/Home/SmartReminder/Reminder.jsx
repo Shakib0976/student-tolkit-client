@@ -40,7 +40,7 @@ const SmartReminder = () => {
         <section className="py-20 bg-gradient-to-r   from-blue-50 to-cyan-50">
             <div className="container mx-auto mt-5 px-6">
                 {/* Heading */}
-                <h2 className="text-3xl font-bold mb-4 flex items-center gap-2 justify-center">
+                <h2 className="text-2xl sm:text-3xl md:text-3xl  font-bold mb-4 flex items-center gap-2 justify-center">
                     <Bell className="w-7 h-7 text-blue-500" />
                     Smart Reminders
                 </h2>

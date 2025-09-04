@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router';
 const Footer = () => {
     return (
         <div>
-            <div className='bg-gradient-to-t from-[#e3eeff] border-t-2 border-[#e3eeff30] to-[#e3eeff20] py-10 md:py-20 md:px-15 px-8'>
+            <div className='bg-gradient-to-t from-[#e3eeff] border-t-2 border-[#e3eeff30] to-[#e3eeff20] py-10  md:px-15 px-8'>
                 <div className='lg:flex justify-between'>
                     <div>
                         {/* logo and title */}

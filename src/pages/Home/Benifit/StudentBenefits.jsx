@@ -48,20 +48,21 @@ const StudentBenefits = () => {
     };
 
     return (
-        <section className="py-30">
-            <div className="text-center mb-8">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                    <GraduationCap className="w-12 h-12 text-blue-600" />
-                    <h2 className="text-3xl md:text-3xl font-bold text-gray-800 mb-2">
+        <section className="py-30 px-5 md:px-10">
+            <div className="text-center mb-8 px-4 sm:px-6 md:px-10">
+                <div className="flex  gap-3 items-center justify-center md:gap-4 mb-4">
+                    <GraduationCap className="w-12 h-12 text-blue-600 mb-2 md:mb-0" />
+                    <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold text-gray-800">
                         Discover the Benefits
                     </h2>
                 </div>
-                <p className="text-gray-600 mb-10 max-w-xl mx-auto">
+                <p className="text-gray-600 max-w-xl mx-auto text-sm sm:text-base md:text-lg">
                     Unlock tools, resources, and tips designed to help students manage their studies, stay organized, and make the most of campus life.
                 </p>
             </div>
 
-            <div className="max-w-7xl mx-auto mt-5 px-6 grid md:grid-cols-2 gap-12 items-center">
+
+            <div className="max-w-7xl mx-auto mt-5 px-6 grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left: Image */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
@@ -72,7 +73,7 @@ const StudentBenefits = () => {
                     <img
                         src={studentImg}
                         alt="Student using toolkit"
-                        className="rounded-2xl shadow-lg"
+                        className="rounded-2xl mt-5 shadow-lg"
                     />
                 </motion.div>
 
