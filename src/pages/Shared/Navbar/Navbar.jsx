@@ -36,7 +36,7 @@ const Navbar = () => {
     }, [lastScrollY]);
 
     return (
-        <div className={`sticky top-0 z-50 pt-5 w-11/12 mx-auto transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}`}>
+        <div className={`sticky top-0 z-50 pt-5 max-w-7xl mx-auto transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}`}>
             <nav className="bg-white text-black px-6 py-3 shadow-md rounded-2xl transition-all duration-300">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo */}

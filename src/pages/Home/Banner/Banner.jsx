@@ -10,7 +10,7 @@ const Banner = () => {
     //  <FcBusinessman size={20} />
     return (
         <section className="relative banner  overflow-hidden">
-            <div className="max-w-11/12 px-5 md:px-10 lg:px-15 py-10 md:py-20  mx-auto lg:grid lg:grid-cols-2 lg:gap-12">
+            <div className="max-w-7xl px-5 md:px-10 lg:px-15 py-10 md:py-20  mx-auto lg:grid lg:grid-cols-2 lg:gap-12">
 
                 {/* Left Content */}
                 <motion.div
@@ -27,7 +27,7 @@ const Banner = () => {
                         initial={{ y: 30, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.8 }}
-                        className="text-3xl font-extrabold text-gray-900 sm:text-5xl leading-tight"
+                        className="text-3xl font-extrabold text-gray-900 sm:text-4xl leading-tight"
                     >
                         Your <span className="text-indigo-600">All-in-One</span> Student Life Companion
                     </motion.h1>

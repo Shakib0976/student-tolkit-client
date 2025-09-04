@@ -77,8 +77,8 @@ const FeatureHighlights = () => {
     }, []);
 
     return (
-        <section className="py-16 md:mt-20  mt-10 bg-gradient-to-r from-purple-50 to-blue-50">
-            <div className="container w-11/12 mx-auto px-6">
+        <section className="py-16  mt-10 bg-gradient-to-r from-purple-50 to-blue-50">
+            <div className="container max-w-7xl mx-auto px-6">
                 <h2 className="text-3xl font-bold mb-4 text-center">
                     🏆 Feature Highlights
                 </h2>
