@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import router from './Router/Router.jsx';
 import DefaultLoader from "./Components/Loader/DefaultLoader.jsx";
 import { RouterProvider } from "react-router";
+import { ThemeProvider } from "./Context/ThemeContext.jsx";
 
 
 const RouterWrapper = () => {
@@ -13,8 +14,12 @@ const RouterWrapper = () => {
         const timer = setTimeout(() => setLoading(false), 2000);
         return () => clearTimeout(timer);
     }, []);
+    
+    // 1 . theme provider 
 
-    return loading ? <DefaultLoader /> : <RouterProvider router={router} />;
+    return loading ? <DefaultLoader /> : <ThemeProvider>
+                                               <RouterProvider router={router} />
+                                         </ThemeProvider>;
 };
 
 export default RouterWrapper;

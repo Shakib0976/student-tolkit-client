@@ -3,13 +3,12 @@ import React from 'react';
 import { motion } from "framer-motion";
 import bannerImg from '../../../assets/portrait-young-boy-with-book-education-day-removebg-preview.png';
 import OrbitingCirclesDemo from '../../../Components/MagicUi/OribitibgCirlePage';
-import { FcBusinessman } from 'react-icons/fc';
 import AvatarCirclesDemo from '../../../Components/MagicUi/AvatarCircleDemo';
 
 const Banner = () => {
-    //  <FcBusinessman size={20} />
+    
     return (
-        <section className="relative banner  overflow-hidden">
+        <section className="relative banner dark:bg-gray-900  overflow-hidden">
             <div className="max-w-7xl px-5 md:px-10 lg:px-15 py-10 md:py-20  mx-auto lg:grid lg:grid-cols-2 lg:gap-12">
 
                 {/* Left Content */}

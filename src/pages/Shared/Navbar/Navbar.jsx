@@ -1,11 +1,13 @@
-import { AlarmClock, BookOpenText, CalendarDays, DollarSign, House, Menu, Moon, NotebookPen, X } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import { AlarmClock, BookOpenText, CalendarDays, DollarSign, House, Menu, Moon, NotebookPen, Sun, X } from 'lucide-react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, NavLink } from 'react-router';
+import { ThemeContext } from '../../../Context/ThemeContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     const navLinks = [
         { icon: <House size={18} />, name: "Home", path: "/" },
@@ -35,9 +37,13 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
+
+
+
+
     return (
         <div className={`sticky top-0 z-50 pt-5 max-w-7xl mx-auto transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}`}>
-            <nav className="bg-white text-black px-6 py-3 shadow-md rounded-2xl transition-all duration-300">
+            <nav className="bg-white dark:bg-gray-800 dark:text-gray-200 text-black px-6 py-3 shadow-md rounded-2xl transition-all duration-300">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-1">
@@ -64,8 +70,12 @@ const Navbar = () => {
 
                     {/* Right Side Controls */}
                     <div className="hidden lg:flex items-center space-x-4">
-                        <button className="p-2 rounded-full hover:bg-gray-200 transition">
-                            <Moon size={20} />
+                        {/* lg theme toggle button */}
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                        >
+                            {theme === "light" ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
                         <Link
                             to="/login"
@@ -98,9 +108,13 @@ const Navbar = () => {
                                 {link.name}
                             </Link>
                         ))}
+                        {/* theme toggle button */}
                         <div className="flex items-center justify-between px-4 mt-3">
-                            <button className="p-2 rounded-full hover:bg-gray-200">
-                                <Moon size={20} />
+                            <button
+                                onClick={toggleTheme}
+                                className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                            >
+                                {theme === "light" ? <Sun size={20} /> : <Moon size={20} />}
                             </button>
                             <Link
                                 to="/login"

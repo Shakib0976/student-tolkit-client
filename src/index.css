@@ -11,6 +11,14 @@
     font-optical-sizing: auto;
 } */
 
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark body {
+    @apply bg-slate-950 text-gray-100;
+}
+
+
 .banner {
     background-image: linear-gradient(to bottom, white 0%, #e7f0fd 100%);
 }
@@ -132,7 +140,7 @@ body {
 }
 
 .animated-button:hover svg {
-    fill:white;
+    fill: white;
 }
 
 .animated-button:active {
