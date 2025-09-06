@@ -42,7 +42,7 @@ const Navbar = () => {
 
 
     return (
-        <div className={`sticky top-0 z-50 pt-5 max-w-7xl mx-auto transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}`}>
+        <div className={`sticky px-5 lg:px-1 top-0 z-50 pt-5 max-w-7xl mx-auto transition-transform duration-300 ${show ? "translate-y-0" : "-translate-y-full"}`}>
             <nav className="bg-white dark:bg-gray-800 dark:text-gray-200 text-black px-6 py-3 shadow-md rounded-2xl transition-all duration-300">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     {/* Logo */}
