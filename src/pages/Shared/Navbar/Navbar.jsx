@@ -1,11 +1,11 @@
 import { AlarmClock, BookOpenText, CalendarDays, DollarSign, House, Menu, Moon, NotebookPen, Sun, X } from 'lucide-react';
 import React, { useState, useEffect, useContext } from 'react';
 import { signOut } from 'firebase/auth';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import { ThemeContext } from '../../../Context/ThemeContext';
-import { AuthContext } from '../../../Context/AuthContext';
 import { auth } from '../../../Firebase/Firebase.config';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../../context/AuthContext';
 
 const Navbar = () => {
     // modal open state
@@ -15,9 +15,11 @@ const Navbar = () => {
     // toggle theme and user context
     const { theme, toggleTheme } = useContext(ThemeContext);
     const { user, setUser } = useContext(AuthContext);
+    // ?for navigatiobn
+    const navigate = useNavigate()
 
 
-//  handle logout
+    //  handle logout
     const logoutUser = () => {
         Swal.fire({
             title: "Are you sure?",
@@ -34,6 +36,7 @@ const Navbar = () => {
                         console.log("User signed out");
                         localStorage.removeItem('devtalksToken');
                         setUser(null); // Clear user from context
+                        navigate('/')
                     })
                     .catch((error) => {
                         console.log("Logout error:", error.message);
@@ -46,7 +49,7 @@ const Navbar = () => {
             }
         });
     }
-  
+
 
     // all navigation links
     const navLinks = [
@@ -112,7 +115,7 @@ const Navbar = () => {
                         >
                             {theme === "light" ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
-                       {/* user img and logout button */}
+                        {/* user img and logout button */}
                         {user ? (
                             <div className="flex items-center space-x-3">
                                 {user.photoURL && (

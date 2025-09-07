@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import axios from "axios";
 import { format, isThisWeek, parse } from "date-fns";
+import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const today = format(new Date(), "eee");
 // const todayFullDate = format(new Date(), "yyyy-MM-dd");
@@ -9,6 +12,10 @@ const Schedule = () => {
 
     // schedules state
     const [schedules, setSchedules] = useState([]);
+    const { user } = use(AuthContext);
+    console.log(user?.email);
+
+    const navigate = useNavigate();
 
     // schedule form state
     const [form, setForm] = useState({
@@ -25,7 +32,7 @@ const Schedule = () => {
     const [showForm, setShowForm] = useState(false);
 
     const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  
+
 
     // Category-based styles
     const categoryStyles = {
@@ -58,57 +65,77 @@ const Schedule = () => {
     // Fetch schedules
     useEffect(() => {
         fetchSchedules();
-    }, []); 
+    }, []);
 
-//    Schedule fetching function
+    //    Schedule fetching function
     const fetchSchedules = async () => {
-        const res = await axios.get("http://localhost:5000/schedules");
-        setSchedules(res.data);
+        try {
+            const res = await axios.get(
+                `http://localhost:5000/email/schedules?email=${user?.email}`
+            );
+            setSchedules(res.data);
+        } catch (err) {
+            console.error("Error fetching schedules:", err);
+        }
     };
+
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
-   
+
 
 
     // schedule form submit handler
+    // update existing schedulev
+    // create new schedule with email
     const handleSubmit = async (e) => {
         e.preventDefault();
         const selectedDate = new Date(`${form.date}T00:00:00`);
         const dayOfWeek = format(selectedDate, "eee");
-          
+        toast.success(`Class scheduled for ${dayOfWeek}`);
 
-        // set if edit from open then send data for update else send for create
-        if (editingId) {
-            const { _id, ...dataWithoutId } = { ...form, day: dayOfWeek };
-            await axios.put(`http://localhost:5000/schedules/${editingId}`, dataWithoutId);
-        } else {
-            await axios.post("http://localhost:5000/schedules", { ...form, day: dayOfWeek });
+        try {
+            if (editingId) {
+                const { _id, ...dataWithoutId } = { ...form, day: dayOfWeek };
+                await axios.put(
+                    `http://localhost:5000/schedules/${editingId}`,
+                    { ...dataWithoutId, email: user.email }
+                );
+            } else {
+                await axios.post("http://localhost:5000/schedules", {
+                    ...form,
+                    day: dayOfWeek,
+                    email: user.email,
+                });
+            }
+
+            // reset form
+            setForm({
+                subject: "",
+                instructor: "",
+                startTime: "",
+                endTime: "",
+                date: "",
+                location: "",
+                category: "",
+            });
+            setEditingId(null);
+            setShowForm(false);
+            fetchSchedules();
+        } catch (err) {
+            console.error("Error saving schedule:", err);
         }
-
-        setForm({
-            subject: "",
-            instructor: "",
-            startTime: "",
-            endTime: "",
-            date: "",
-            location: "",
-            category: "",
-        });
-        setEditingId(null);
-        setShowForm(false);
-        fetchSchedules();
     };
 
-
+    //  handle edit schedule
     const handleEdit = (id) => {
         const schedule = schedules.find((s) => s._id === id);
         setForm(schedule);
         setEditingId(id);
         setShowForm(true);
     };
-    
+
 
     // handle delete schedule
     const handleDelete = async (id) => {
@@ -124,15 +151,14 @@ const Schedule = () => {
 
     const getNextClass = () => {
         const now = new Date();
-        const upcoming = todaySchedules
-            .map((s) => ({ ...s, parsed: parse(s.startTime, "HH:mm", new Date()) }))
+        const upcoming = todaySchedules.map((s) => ({ ...s, parsed: parse(s.startTime, "HH:mm", new Date()) }))
             .filter((s) => s.parsed > now)
             .sort((a, b) => a.parsed - b.parsed);
         return upcoming[0] || null;
     };
 
     const nextClass = getNextClass();
-    
+
     // this week classes count
     const thisWeekClasses = schedules.filter((s) => {
         if (!s.date) return false;
@@ -148,7 +174,15 @@ const Schedule = () => {
                     <p className="text-gray-500">Manage your weekly class timetable</p>
                 </div>
                 <button
-                    onClick={() => setShowForm(true)}
+                    onClick={() => {
+                        // redirect if not logged in
+                        if (!user) {
+                            navigate("/login");
+                        } else {
+                            setShowForm(true);
+                        }
+                        // show modal if logged in
+                    }}
                     className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg shadow"
                 >
                     + Add Class

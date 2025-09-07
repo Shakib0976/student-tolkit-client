@@ -5,6 +5,7 @@ import Schedule from "../pages/Schedule/Schedule";
 import ErrorPage from "../Components/Error/ErrorPage";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import Budget from "../pages/Budget/Budget";
 
 
 const router = createBrowserRouter([
@@ -25,9 +26,16 @@ const router = createBrowserRouter([
       },
       {
         path: "register", Component: Register,
+      },
+      {
+        path: "budget", Component: Budget
       }
     ]
   },
 ]);
 
 export default router;
+
+
+
+
