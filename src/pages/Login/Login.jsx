@@ -14,9 +14,11 @@ const Login = () => {
 
     const { setUser, googleSignIn, logInUser, setLoading } = use(AuthContext);
 
-
+    //  navigate login
     const navigate = useNavigate();
+  
 
+    //  google signin
 
     const handleSigninGoogle = () => {
         setLoading(true);
@@ -40,7 +42,7 @@ const Login = () => {
 
     }
 
-
+//   login user
     const handleLogin = (e) => {
         e.preventDefault()
         const email = e.target.email.value;
@@ -68,21 +70,23 @@ const Login = () => {
 
     }
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center lg:mx-20 px-4 py-8 bg-gray-50 dark:bg-black">
-            {/* Left Section - Text + Lottie */}
-            {/* <div className="flex-1 w-full flex flex-col items-center justify-center text-center mb-2 lg:mb-0">
-                <p className="space-grotesk-500 text-gray-500 font-semibold text-center  lg:mt-0">
+        <div className="min-h-screen flex flex-col items-center justify-center lg:mx-20 px-4 bg-gray-50 dark:bg-black">
+
+
+            {/* login section */}
+            <div onSubmit={handleLogin} className="w-full md:mt-7  max-w-md p-2 lg:p-8 md:px-6 md:py-6 rounded-2xl shadow-[0_0_5px_rgba(110,69,226,0.5),_0_0_10px_rgba(136,211,206,0.3)] bg-gradient-to-br bg-white dark:bg-transparent border border-gray-200 dark:border-gray-700">
+
+                <p className="space-grotesk-500 sm:text-sm text-gray-500 font-semibold text-center  mt-5">
                     Welcome Back
                 </p>
-                <h1 className="space-grotesk-500 text-2xl sm:text-3xl md:text-4xl font-bold text-center mt-2">
-                    Sign In your account
+                <h1 className="space-grotesk-500 mb-3 text-xl sm:text-2xl md:text-3xl font-bold text-center mt-2">
+                    Sign in  your account
                 </h1>
-            </div> */}
 
-            {/* Right Section - Form */}
-            <div onSubmit={handleLogin} className="w-full max-w-md p-2 lg:p-8 md:px-6 md:py-6 rounded-2xl shadow-[0_0_5px_rgba(110,69,226,0.5),_0_0_10px_rgba(136,211,206,0.3)] bg-gradient-to-br bg-white dark:bg-transparent border border-gray-200 dark:border-gray-700">
+
                 <div className="card-body">
-                    <form className="fieldset space-y-4">
+
+                    <form className="fieldset space-y-1">
                         {/* Email */}
                         <div>
                             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
@@ -92,7 +96,7 @@ const Login = () => {
                                 required
                                 name="email"
                                 type="email"
-                                className="input-field p-4 border-2 rounded-2xl border-gray-500 w-full"
+                                className="input-field p-3 text-sm border-1 rounded-2xl border-gray-500 w-full"
                                 placeholder="enter your name here"
                             />
                         </div>
@@ -105,7 +109,7 @@ const Login = () => {
                             <input
                                 name="password"
                                 type="password"
-                                className="input-field p-4 border-2 rounded-2xl border-gray-500 w-full"
+                                className="input-field p-3 border-1 text-sm rounded-2xl border-gray-500 w-full"
                                 placeholder="Password"
                             />
                         </div>

@@ -5,6 +5,7 @@ import DefaultLoader from "./Components/Loader/DefaultLoader.jsx";
 import { RouterProvider } from "react-router";
 import { ThemeProvider } from "./Context/ThemeContext.jsx";
 import AuthProvider from "./Context/AuthProvider.jsx";
+import { Toaster } from "react-hot-toast";
 // import AuthProvider from "./Context/AuthProvider.jsx";
 
 
@@ -24,6 +25,7 @@ const RouterWrapper = () => {
 
     return loading ? <DefaultLoader /> : <AuthProvider>
         <ThemeProvider>
+            <Toaster position="top-right" />
             <RouterProvider router={router} />
         </ThemeProvider>
     </AuthProvider>;
