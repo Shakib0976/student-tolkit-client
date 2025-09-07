@@ -6,6 +6,7 @@ import ErrorPage from "../Components/Error/ErrorPage";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Budget from "../pages/Budget/Budget";
+import StudyPlanner from "../pages/StudyPlanner/StudyPlanner";
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,9 @@ const router = createBrowserRouter([
       },
       {
         path: "budget", Component: Budget
+      },
+      {
+        path: 'planner', Component: StudyPlanner,
       }
     ]
   },
