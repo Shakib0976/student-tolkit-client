@@ -4,6 +4,8 @@ import router from './Router/Router.jsx';
 import DefaultLoader from "./Components/Loader/DefaultLoader.jsx";
 import { RouterProvider } from "react-router";
 import { ThemeProvider } from "./Context/ThemeContext.jsx";
+import AuthProvider from "./Context/AuthProvider.jsx";
+// import AuthProvider from "./Context/AuthProvider.jsx";
 
 
 const RouterWrapper = () => {
@@ -14,12 +16,17 @@ const RouterWrapper = () => {
         const timer = setTimeout(() => setLoading(false), 2000);
         return () => clearTimeout(timer);
     }, []);
-    
-    // 1 . theme provider 
 
-    return loading ? <DefaultLoader /> : <ThemeProvider>
-                                               <RouterProvider router={router} />
-                                         </ThemeProvider>;
+    // 1 . theme provider 
+    // 2. auth provider
+    // 3. router provider
+    // 4. loader
+
+    return loading ? <DefaultLoader /> : <AuthProvider>
+        <ThemeProvider>
+            <RouterProvider router={router} />
+        </ThemeProvider>
+    </AuthProvider>;
 };
 
 export default RouterWrapper;

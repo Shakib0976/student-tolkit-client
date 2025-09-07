@@ -1,13 +1,17 @@
 import { AlarmClock, BookOpenText, CalendarDays, DollarSign, House, Menu, Moon, NotebookPen, Sun, X } from 'lucide-react';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, use } from 'react';
 import { Link, NavLink } from 'react-router';
 import { ThemeContext } from '../../../Context/ThemeContext';
+import { AuthContext } from '../../../Context/AuthContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const { theme, toggleTheme } = useContext(ThemeContext);
+    const { user } = use(AuthContext);
+
+    console.log(user);
 
     const navLinks = [
         { icon: <House size={18} />, name: "Home", path: "/" },
