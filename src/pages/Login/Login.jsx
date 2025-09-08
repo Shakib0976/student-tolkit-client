@@ -130,14 +130,14 @@ const Login = () => {
                         </button>
                     </form>
 
-                    <p className="text-center my-4 text-sm">
+                    <p className="text-center  text-sm">
                         Don't have an account?
                         <span className="text-blue-700">
                             <Link to="/register"> Sign up</Link>
                         </span>
                     </p>
 
-                    <p className="font-bold text-gray-400 text-center mb-4 text-sm">
+                    <p className="font-bold text-gray-400 text-center mb-2 text-sm">
                         Or, login with
                     </p>
 

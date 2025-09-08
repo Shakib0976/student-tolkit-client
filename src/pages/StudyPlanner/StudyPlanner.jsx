@@ -182,7 +182,7 @@ const StudyPlanner = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-50 min-h-screen max-w-7xl mx-auto">
+        <div className="p-6 bg-[#F8F7FD] min-h-screen max-w-7xl mx-auto">
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <div>

@@ -76,7 +76,7 @@ const FocusTimer = () => {
     };
 
     return (
-        <div className="p-6 max-w-7xl mx-auto bg-gray-50 min-h-screen">
+        <div className="p-6 max-w-7xl mx-auto bg-[#F8F7FD] min-h-screen">
             {/* Audio Elements  with timer start adn end based*/}
             <audio ref={tickRef} src={tickSound} />
             <audio ref={beepRef} src={beepSound} />

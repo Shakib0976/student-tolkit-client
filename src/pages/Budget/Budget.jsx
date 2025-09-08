@@ -124,13 +124,13 @@ const Budget = () => {
             {/* Header */}
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold text-purple-600">Budget Tracker</h1>
+                    <h1 className=" text-2xl md:text-3xl font-bold text-purple-600">Budget Tracker</h1>
                     <p className="text-gray-500">Keep track of your income and expenses</p>
                 </div>
 
                 {/* this button budget added if user not available then navigate login page */}
                 <button
-                    className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+                    className="bg-purple-600 text-white md:px-4 py-2 rounded hover:bg-purple-700"
 
                     onClick={() => {
                         // redirect if not logged in
