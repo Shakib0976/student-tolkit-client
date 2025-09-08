@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const Budget = () => {
     const [transactions, setTransactions] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
-    
+    const navigate = useNavigate();
+
     // modal visibility
     const [showModal, setShowModal] = useState(false);
 
@@ -125,9 +127,20 @@ const Budget = () => {
                     <h1 className="text-3xl font-bold text-purple-600">Budget Tracker</h1>
                     <p className="text-gray-500">Keep track of your income and expenses</p>
                 </div>
+
+                {/* this button budget added if user not available then navigate login page */}
                 <button
                     className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-                    onClick={() => setShowModal(true)}
+
+                    onClick={() => {
+                        // redirect if not logged in
+                        if (!user) {
+                            navigate("/login");
+                        } else {
+                            setShowModal(true);
+                        }
+                        // show modal if logged in
+                    }}
                 >
                     + Add Transaction
                 </button>

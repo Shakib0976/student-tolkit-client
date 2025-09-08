@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useNavigate } from "react-router";
 
 
 
@@ -13,6 +14,7 @@ const StudyPlanner = () => {
     const [filter, setFilter] = useState("All");
     const [showModal, setShowModal] = useState(false);
     const MySwal = withReactContent(Swal);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         taskTitle: "",
         subject: "",
@@ -88,7 +90,7 @@ const StudyPlanner = () => {
     };
 
 
-    // Delete Task
+    // Delete Task with confirmation  sweet alert 2
     const handleDelete = async (id) => {
         try {
             if (!id) return;
@@ -189,7 +191,16 @@ const StudyPlanner = () => {
                 </div>
                 <button
                     className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-                    onClick={() => setShowModal(true)}
+                    onClick={() => {
+                        // redirect if not logged in
+                        if (!user) {
+                            navigate("/login");
+                        } else {
+                            setShowModal(true)
+
+                        }
+                        // show modal if logged in
+                    }}
                 >
                     + Add Task
                 </button>

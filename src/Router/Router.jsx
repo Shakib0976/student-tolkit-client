@@ -7,6 +7,8 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Budget from "../pages/Budget/Budget";
 import StudyPlanner from "../pages/StudyPlanner/StudyPlanner";
+import Quiz from "../pages/Quiz/Quiz";
+import FocusTimer from "../pages/FocusTimer/FocusTimer";
 
 
 const router = createBrowserRouter([
@@ -33,6 +35,12 @@ const router = createBrowserRouter([
       },
       {
         path: 'planner', Component: StudyPlanner,
+      },
+      {
+        path: 'quiz', Component: Quiz
+      },
+      {
+        path: 'timer', Component: FocusTimer
       }
     ]
   },
