@@ -1,50 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { Bell, Trash2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { AuthContext } from '../../../Context/AuthContext'
 
 const SmartReminder = () => {
 
     const [reminders, setReminders] = useState([]);
     const [task, setTask] = useState("");
     const [date, setDate] = useState("");
+    const { user } = use(AuthContext);
+    const userEmail = user?.email;
 
-
-
+    // Fetch reminders from backend
     useEffect(() => {
-        // Load from localStorage only on mount
-        const saved = localStorage.getItem("reminders");
-        if (saved) setReminders(JSON.parse(saved));
-    }, []);
+        if (!userEmail) return;
+        fetch(`http://localhost:5000/reminders/${userEmail}`)
+            .then((res) => res.json())
+            .then((data) => setReminders(data))
+            .catch((err) => console.error(err));
+    }, [userEmail]);
 
-    useEffect(() => {
-        // Save every time reminders change
-        localStorage.setItem("reminders", JSON.stringify(reminders));
-    }, [reminders]);
+    // Add reminder data from DB
+    const handleAddReminder = async () => {
+        if (!task || !date || !userEmail) return;
 
-    // reminder logic
+        const newReminder = { email: userEmail, task, date };
+        await fetch("http://localhost:5000/reminders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newReminder),
+        });
 
-    const handleAddReminder = () => {
-        if (!task || !date) return;
-        const newReminder = { id: Date.now(), task, date };
-        setReminders([...reminders, newReminder]);
+        // Refresh reminders
+        fetch(`http://localhost:5000/reminders/${userEmail}`)
+            .then((res) => res.json())
+            .then((data) => setReminders(data));
+
         setTask("");
         setDate("");
     };
 
-    // delete reminder data
-    const handleDelete = (id) => {
-        setReminders(reminders.filter((r) => r.id !== id));
+    // Delete reminder
+    const handleDelete = async (id) => {
+        await fetch(`http://localhost:5000/reminders/${id}`, {
+            method: "DELETE",
+        });
+
+        setReminders(reminders.filter((r) => r._id !== id));
     };
 
+
     return (
-        <section className="py-20 bg-gradient-to-r   from-blue-50 to-cyan-50">
+        <section className="py-20 bg-gradient-to-r from-blue-50 to-cyan-50">
             <div className="container mx-auto mt-5 px-6">
                 {/* Heading */}
-                <h2 className="text-2xl sm:text-3xl md:text-3xl  font-bold mb-4 flex items-center gap-2 justify-center">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-4 flex items-center gap-2 justify-center">
                     <Bell className="w-7 h-7 text-blue-500" />
                     Smart Reminders
                 </h2>
-                <p className="text-gray-600 text-center mb-8 md:mb-13">
+                <p className="text-gray-600 text-center mb-8">
                     Never miss deadlines again! Add your important tasks and reminders.
                 </p>
 
@@ -82,7 +96,7 @@ const SmartReminder = () => {
                     ) : (
                         reminders.map((reminder) => (
                             <div
-                                key={reminder.id}
+                                key={reminder._id}
                                 className="flex items-center justify-between bg-white shadow rounded-xl px-6 py-4"
                             >
                                 <div>
@@ -94,7 +108,7 @@ const SmartReminder = () => {
                                     </p>
                                 </div>
                                 <button
-                                    onClick={() => handleDelete(reminder.id)}
+                                    onClick={() => handleDelete(reminder._id)}
                                     className="text-red-500 hover:text-red-700 transition"
                                 >
                                     <Trash2 className="w-5 h-5" />
