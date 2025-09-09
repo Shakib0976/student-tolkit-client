@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { FaRobot } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../Context/AuthContext";
+import { ClipboardList } from "lucide-react";
+import toast from "react-hot-toast";
 
 const subjects = ["Mathematics", "Physics", "Chemistry", "Biology", "Computer Science"];
 
@@ -113,6 +115,7 @@ const Quiz = () => {
             method: "DELETE",
         });
         setAttempts([]);
+        toast.success('All History Clear Success')
     };
 
     //   this user correct , incorrect  and attempt detected
@@ -125,7 +128,7 @@ const Quiz = () => {
             <h1 className=" text-2xl md:text-3xl font-bold text-purple-600 ">
                 Exam Q&A Generator
             </h1>
-            <p className="text-gray-500 mb-4">
+            <p className="text-gray-500 dark:text-gray-400 mb-4">
                 Generate question and strengthen your knowledge
             </p>
 
@@ -135,9 +138,9 @@ const Quiz = () => {
                 <div className="md:flex space-y-3 md:space-x-6">
                     {/* Subject */}
                     <div className=" md:w-1/3">
-                        <label className="block text-gray-600">Select Subject</label>
+                        <label className="block dark:text-gray-300 text-gray-600">Select Subject</label>
                         <select
-                            className="w-full border rounded-lg px-3 py-2"
+                            className="w-full border dark:bg-slate-800 rounded-lg px-3 py-2"
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
                         >
@@ -151,9 +154,9 @@ const Quiz = () => {
 
                     {/* Difficulty section */}
                     <div className="md:w-1/3">
-                        <label className="block text-gray-600">Difficulty Level</label>
+                        <label className="block dark:text-gray-300 text-gray-600">Difficulty Level</label>
                         <select
-                            className="w-full border rounded-lg px-3 py-2"
+                            className="w-full border dark:bg-slate-800 rounded-lg px-3 py-2"
                             value={difficulty}
                             onChange={(e) => setDifficulty(e.target.value)}
                         >
@@ -165,9 +168,9 @@ const Quiz = () => {
 
                     {/* Question Type select section */}
                     <div className="md:w-1/3">
-                        <label className="block text-gray-600">Question Type</label>
+                        <label className="block dark:text-gray-300 text-gray-600">Question Type</label>
                         <select
-                            className="w-full border rounded-lg px-3 py-2"
+                            className="w-full border dark:bg-slate-800 rounded-lg px-3 py-2"
                             value={questionType}
                             onChange={(e) => setQuestionType(e.target.value)}
                         >
@@ -193,6 +196,8 @@ const Quiz = () => {
                             setAnsweredQuestions(0);
                             setCorrectAnswers(0);
                             setWrongAnswers(0);
+                            setSelectedAnswer(null);
+                            SetSelectedCorrectAns(false);
                         }}
                         className="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400 transition"
                     >
@@ -222,7 +227,7 @@ const Quiz = () => {
 
                     {/* No Question */}
                     {!loading && messages.length === 0 && (
-                        <div className="h-40 flex flex-col items-center justify-center text-gray-400 border-2 border-dashed rounded-xl">
+                        <div className="h-50 flex flex-col items-center justify-center text-gray-400 border-2 border-dashed rounded-xl">
                             <FaRobot className="text-3xl mb-2" />
                             <p>No question generated yet</p>
                         </div>
@@ -240,23 +245,23 @@ const Quiz = () => {
                                 <FaRobot />
                                 <span className="font-semibold">AI:</span>
                             </div>
-                            <p className="bg-gray-100  dark:bg-slate-300 px-4 py-3 rounded-lg text-gray-800 shadow-sm">
+                            {/* Question */}
+                            <p className="text-gray-800 dark:text-gray-200 text-lg font-medium leading-relaxed">
                                 {msg.content}
                             </p>
+
+                            {/* Options */}
                             {msg.options && (
-                                <div className="flex flex-col gap-3 mt-3">
+                                <div className="flex flex-col gap-3 mt-4">
                                     {msg.options.map((opt, idx) => (
                                         <button
                                             key={idx}
                                             onClick={() => handleAnswer(opt)}
                                             disabled={!!selectedAnswer}
-                                            className={`px-4 py-2 rounded-lg text-left border transition shadow-sm
-                                                     ${selectedAnswer === opt
-                                                    ? selectedCorrectAns
-                                                        ? "bg-green-100 dark:bg-green-950 border-green-500"
-                                                        : "bg-red-100 border-red-500 dark:bg-red-950"
-                                                    : "hover:bg-gray-50 dark:hover:dark:bg-gray-600"
-                                                }`}
+                                            className={`px-4 py-3 rounded-lg border text-left text-sm font-medium transition-all duration-200 shadow-sm ${selectedAnswer === opt ? selectedCorrectAns ? "bg-green-100 dark:bg-green-900/40 border-green-500 text-green-700 dark:text-green-400" : "bg-red-100 dark:bg-red-900/40 border-red-500 text-red-700 dark:text-red-400"
+                                                : "bg-gray-50 dark:bg-gray-800 hover:bg-purple-50 dark:hover:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300"
+                                                } ${!selectedAnswer ? "hover:shadow-md cursor-pointer" : "opacity-90 cursor-not-allowed"}
+          `}
                                         >
                                             {opt}
                                         </button>
@@ -283,23 +288,27 @@ const Quiz = () => {
                     <div className="text-center mb-6 w-full">
                         <h4 className="font-semibold text-gray-600 mb-4">Session Statistics</h4>
                         {
-                            user ? <div className="grid grid-cols-3 gap-4">
-                                <div>
-                                    <span className="block text-xl font-bold">{totalAnsweredByDb}</span>
-                                    <span className="text-gray-500 text-sm">Answered</span>
+                            user ? <div>
+                                <div className="grid grid-cols-3 gap-4">
+                                    <div>
+                                        <span className="block text-xl font-bold">{totalAnsweredByDb}</span>
+                                        <span className="text-gray-500 text-sm">Answered</span>
+                                    </div>
+                                    <div>
+                                        <span className="block text-xl font-bold text-green-600">
+                                            {totalCorrectByDb}
+                                        </span>
+                                        <span className="text-gray-500 text-sm">Correct</span>
+                                    </div>
+                                    <div>
+                                        <span className="block text-xl font-bold text-red-600">
+                                            {totalWrongByDb}
+                                        </span>
+                                        <span className="text-gray-500 text-sm">Wrong</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span className="block text-xl font-bold text-green-600">
-                                        {totalCorrectByDb}
-                                    </span>
-                                    <span className="text-gray-500 text-sm">Correct</span>
-                                </div>
-                                <div>
-                                    <span className="block text-xl font-bold text-red-600">
-                                        {totalWrongByDb}
-                                    </span>
-                                    <span className="text-gray-500 text-sm">Wrong</span>
-                                </div>
+
+
                             </div>
                                 : <div className="grid grid-cols-3 gap-4">
                                     <div>
@@ -343,7 +352,7 @@ const Quiz = () => {
                     {attempts.length > 0 && (
                         <button
                             onClick={clearHistory}
-                            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition text-sm"
+                            className="bg-blue-950   text-white px-4  py-2 cursor-pointer rounded hover:bg-blue-800 transition text-sm"
                         >
                             Clear History
                         </button>
@@ -351,7 +360,15 @@ const Quiz = () => {
                 </div>
 
                 {attempts.length === 0 ? (
-                    <p className="text-gray-500">No attempts saved yet.</p>
+                    <div className="flex flex-col items-center justify-center py-10 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800">
+                        <ClipboardList className="h-12 w-12 text-purple-500 mb-4 animate-bounce" />
+                        <p className="text-gray-500 dark:text-gray-400 text-center text-lg font-medium">
+                            No attempts saved yet
+                        </p>
+                        <p className="text-gray-400 dark:text-gray-500 text-sm text-center mt-2">
+                            Your quiz attempts will appear here once you start solving questions.
+                        </p>
+                    </div>
                 ) : (
                     <ul className="space-y-3 max-h-80 overflow-y-auto">
                         {attempts.map((a, idx) => (
@@ -363,7 +380,7 @@ const Quiz = () => {
                                     <p className="font-semibold">
                                         {a.subject} ({a.difficulty})
                                     </p>
-                                    <p className="text-sm text-gray-600">{a.question}</p>
+                                    <p className="text-sm dark:text-gray-400 text-gray-600">{a.question}</p>
                                     <p className="text-sm">
                                         Your Answer:{" "}
                                         <span

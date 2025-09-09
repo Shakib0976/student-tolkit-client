@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router";
+import { CalendarDays, Timer } from "lucide-react";
 
 
 
@@ -187,10 +188,10 @@ const StudyPlanner = () => {
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h1 className="text-3xl font-bold text-purple-600">Study Planner</h1>
-                    <p className="text-gray-500">Break down your study goals into manageable tasks</p>
+                    <p className="text-gray-500 dark:text-gray-400">Break down your study goals into manageable tasks</p>
                 </div>
                 <button
-                    className="bg-purple-600 text-white  px-4 py-2 rounded hover:bg-purple-700"
+                    className="bg-purple-600 text-white w-30 h-10  md:px-4 md:py-2 rounded hover:bg-purple-700"
                     onClick={() => {
                         // redirect if not logged in
                         if (!user) {
@@ -209,19 +210,19 @@ const StudyPlanner = () => {
             {/* Summary */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-white dark:bg-slate-900 p-4 rounded shadow">
-                    <p className="text-gray-500">Total Tasks</p>
+                    <p className="text-gray-500 dark:text-gray-100">Total Tasks</p>
                     <p className="text-2xl font-bold">{totalTasks}</p>
                 </div>
                 <div className="bg-white p-4 dark:bg-slate-900 rounded shadow">
-                    <p className="text-gray-500">Completed</p>
+                    <p className="text-gray-500 dark:text-gray-100">Completed</p>
                     <p className="text-2xl font-bold text-green-500">{completedTasks}</p>
                 </div>
                 <div className="bg-white p-4 dark:bg-slate-900 rounded shadow">
-                    <p className="text-gray-500">Pending</p>
+                    <p className="text-gray-500 dark:text-gray-100">Pending</p>
                     <p className="text-2xl font-bold text-yellow-500">{pendingTasks}</p>
                 </div>
                 <div className="bg-white p-4 dark:bg-slate-900 rounded shadow">
-                    <p className="text-gray-500">Study Hours</p>
+                    <p className="text-gray-500 dark:text-gray-100">Study Hours</p>
                     <p className="text-2xl font-bold text-blue-500">{studyHours}h</p>
                 </div>
             </div>
@@ -242,53 +243,116 @@ const StudyPlanner = () => {
             {/* Task List */}
             <div className="space-y-4">
                 {filteredTasks.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-20 text-gray-400">
-                        <p className="text-lg font-semibold">No tasks here!</p>
-                        <p className="text-gray-500">Add a new task to get started.</p>
+                    <div className="flex flex-col items-center justify-center py-24 px-6 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 rounded-xl shadow-inner">
+
+                        {/* Illustration */}
+                        <div className="bg-white dark:bg-slate-800 rounded-full p-6 shadow-md">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-20 w-20 text-purple-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={1.6}
+                                    d="M9 12h6m2 4H7m10-8H7m-4 8V6a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+                                />
+                            </svg>
+                        </div>
+
+                        {/* Heading */}
+                        <h2 className="mt-6 text-2xl font-bold text-gray-800 dark:text-gray-200">
+                            No Study Tasks Yet
+                        </h2>
+                        <p className="mt-2 text-gray-500 dark:text-gray-400 max-w-md text-center">
+                            Organize your learning goals and track progress effectively.
+                            Start by adding your first task to your study planner.
+                        </p>
                     </div>
                 ) : (
                     filteredTasks.map((task) => (
                         <div
                             key={task._id}
-                            className="bg-white dark:bg-slate-900 p-4 rounded shadow flex flex-col md:flex-row justify-between items-start md:items-center"
+                            className="bg-white dark:bg-slate-900 rounded-xl shadow-md border border-gray-100 dark:border-slate-700 p-5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 hover:shadow-lg transition-all"
                         >
-                            <div className="flex flex-col">
-                                <h3 className={`font-semibold ${task.completed ? "line-through text-gray-400" : ""}`}>
+                            {/* Left Section */}
+                            <div className="flex flex-col flex-1 space-y-2">
+                                {/* Title */}
+                                <h3
+                                    className={`text-lg font-semibold break-words ${task.completed
+                                        ? "line-through text-gray-400"
+                                        : "text-gray-800 dark:text-gray-200"
+                                        }`}
+                                >
                                     {task.title}
                                 </h3>
-                                <p className="text-gray-500">{task.description}</p>
-                                <div className="flex gap-2 mt-1 text-sm">
-                                    <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">{task.category}</span>
-                                    <span className={`px-2 py-0.5 rounded ${task.priority === "high" ? "bg-red-100 text-red-800" : task.priority === "medium" ? "bg-orange-100 text-orange-800" : "bg-green-100 text-green-800"}`}>
+
+                                {/* Description */}
+                                {task.description && (
+                                    <p className="text-gray-500 dark:text-gray-400 text-sm break-words">
+                                        {task.description}
+                                    </p>
+                                )}
+
+                                {/* Tags */}
+                                <div className="flex flex-wrap gap-2 mt-2 text-xs">
+                                    <span className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 px-2 py-0.5 rounded-full font-medium">
+                                        {task.category}
+                                    </span>
+                                    <span
+                                        className={`px-2 py-0.5 rounded-full font-medium ${task.priority === "high"
+                                            ? "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300"
+                                            : task.priority === "medium"
+                                                ? "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300"
+                                                : "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
+                                            }`}
+                                    >
                                         {task.priority}
                                     </span>
                                     {calculateOverdue(task.date) && (
-                                        <span className="bg-red-100 text-red-800 px-2 py-0.5 rounded">{calculateOverdue(task.date)}</span>
+                                        <span className="bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300 px-2 py-0.5 rounded-full font-medium">
+                                            {calculateOverdue(task.date)}
+                                        </span>
                                     )}
                                 </div>
-                                <div className="flex gap-4 mt-1 text-gray-400 text-sm">
-                                    <span>{new Date(task.date).toLocaleDateString()}</span>
-                                    <span>{task.estimatedHours}h estimated</span>
+
+                                {/* Metadata */}
+                                <div className="flex flex-wrap gap-4 mt-2 text-gray-400 text-xs font-medium">
+                                    <span className="flex items-center gap-1">
+                                        <CalendarDays className="w-4 h-4 text-gray-400" />
+                                        {new Date(task.date).toLocaleDateString()}
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                        <Timer className="w-4 h-4 text-gray-400" />
+                                        {task.estimatedHours}h estimated
+                                    </span>
                                 </div>
                             </div>
 
-                            <div className="flex flex-col md:flex-row gap-2 mt-2 md:mt-0">
+                            {/* Right Section (Actions) */}
+                            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                                 <button
                                     onClick={() => markComplete(task._id)}
                                     disabled={task.completed}
-                                    className={`px-3 py-1 rounded ${task.completed ? "border-green-500 border   text-green-500 cursor-not-allowed" : "bg-green-500 text-white hover:bg-green-600 cursor-pointer"}`}
+                                    className={`flex-1 sm:flex-none px-4 py-2 rounded-lg font-medium shadow-sm transition text-center ${task.completed
+                                        ? "border border-green-500 text-green-600 dark:text-green-400 cursor-not-allowed bg-green-50 dark:bg-slate-800"
+                                        : "bg-green-500 text-white hover:bg-green-600"
+                                        }`}
                                 >
-                                    {task.completed ? "Completed" : "Complete"}
+                                    {task.completed ? "Completed" : "Mark Complete"}
                                 </button>
                                 <button
-
                                     onClick={() => handleDelete(task._id)}
-                                    className="text-red-500 cursor-pointer hover:text-red-700 px-3 py-1 rounded border border-red-500 hover:bg-red-100"
+                                    className="flex-1 sm:flex-none px-4 py-2 rounded-lg font-medium border border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition text-center"
                                 >
                                     Delete
                                 </button>
                             </div>
                         </div>
+
                     ))
                 )}
             </div>

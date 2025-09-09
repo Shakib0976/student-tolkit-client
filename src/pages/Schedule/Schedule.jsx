@@ -212,21 +212,21 @@ const Schedule = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-white dark:bg-slate-900 p-4 rounded-lg shadow flex items-center justify-between">
                     <div>
-                        <p className="text-gray-500">Total Classes</p>
+                        <p className="text-gray-500 dark:text-gray-200">Total Classes</p>
                         <p className="text-2xl font-bold">{totalClasses}</p>
                     </div>
                     <span className="text-blue-500 text-2xl">📅</span>
                 </div>
                 <div className="bg-white dark:bg-slate-900 p-4 rounded-lg shadow flex items-center justify-between">
                     <div>
-                        <p className="text-gray-500">Today's Classes</p>
+                        <p className="text-gray-500 dark:text-gray-200">Today's Classes</p>
                         <p className="text-2xl font-bold">{todaysClasses}</p>
                     </div>
                     <span className="text-green-500 text-2xl">⏰</span>
                 </div>
                 <div className="bg-white p-4 dark:bg-slate-900 rounded-lg shadow flex items-center justify-between">
                     <div>
-                        <p className="text-gray-500">Next Class</p>
+                        <p className="text-gray-500 dark:text-gray-200">Next Class</p>
                         <p className="text-lg font-bold text-orange-500">
                             {nextClass ? `${nextClass.subject} ${nextClass.startTime}` : "None"}
                         </p>
@@ -235,7 +235,7 @@ const Schedule = () => {
                 </div>
                 <div className="bg-white dark:bg-slate-900 p-4 rounded-lg shadow flex items-center justify-between">
                     <div>
-                        <p className="text-gray-500">This Week</p>
+                        <p className="text-gray-500 dark:text-gray-200">This Week</p>
                         <p className="text-2xl font-bold">{thisWeekClasses}</p>
                     </div>
                     <span className="text-purple-500 text-2xl">🗓️</span>
@@ -269,7 +269,7 @@ const Schedule = () => {
                                 className="bg-white dark:bg-slate-900 rounded-lg shadow p-4"
                             >
                                 <h3 className="font-bold text-center mb-2">{day}</h3>
-                                <p className="text-sm text-gray-500 mb-2">
+                                <p className="text-sm text-gray-500 dark:text-gray-300 mb-2">
                                     {dayClasses.length} classes
                                 </p>
                                 {dayClasses.length > 0 ? (
@@ -445,18 +445,6 @@ const Schedule = () => {
                                     placeholder="enter your class Room no "
                                     onChange={handleChange}
                                     className="input  dark:bg-slate-800 input-bordered w-full"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium mb-1">Category</label>
-                                <input
-                                    type="text"
-                                    name="category"
-                                    value={form.category}
-                                    placeholder="enter your class type category"
-                                    onChange={handleChange}
-                                    className="input dark:bg-slate-800 input-bordered w-full"
                                 />
                             </div>
 
