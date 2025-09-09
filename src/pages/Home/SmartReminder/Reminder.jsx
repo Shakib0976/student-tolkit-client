@@ -14,7 +14,7 @@ const SmartReminder = () => {
     // Fetch reminders from backend
     useEffect(() => {
         if (!userEmail) return;
-        fetch(`http://localhost:5000/reminders/${userEmail}`)
+        fetch(`https://student-toolkit-balkend.vercel.app/reminders/${userEmail}`)
             .then((res) => res.json())
             .then((data) => setReminders(data))
             .catch((err) => console.error(err));
@@ -25,14 +25,14 @@ const SmartReminder = () => {
         if (!task || !date || !userEmail) return;
 
         const newReminder = { email: userEmail, task, date };
-        await fetch("http://localhost:5000/reminders", {
+        await fetch("https://student-toolkit-balkend.vercel.app/reminders", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newReminder),
         });
 
         // Refresh reminders
-        fetch(`http://localhost:5000/reminders/${userEmail}`)
+        fetch(`https://student-toolkit-balkend.vercel.app/reminders/${userEmail}`)
             .then((res) => res.json())
             .then((data) => setReminders(data));
 
@@ -42,7 +42,7 @@ const SmartReminder = () => {
 
     // Delete reminder
     const handleDelete = async (id) => {
-        await fetch(`http://localhost:5000/reminders/${id}`, {
+        await fetch(`https://student-toolkit-balkend.vercel.app/reminders/${id}`, {
             method: "DELETE",
         });
 

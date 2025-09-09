@@ -35,7 +35,7 @@ const Quiz = () => {
     // Fetch previous attempts for feature section
     useEffect(() => {
         if (!userEmail) return;
-        fetch(`http://localhost:5000/quiz-attempts/${userEmail}`)
+        fetch(`https://student-toolkit-balkend.vercel.app/quiz-attempts/${userEmail}`)
             .then((res) => res.json())
             .then((data) => setAttempts(data))
             .catch((err) => console.error(err));
@@ -48,7 +48,7 @@ const Quiz = () => {
         setLoading(true);
         setSelectedAnswer(null);
         try {
-            const res = await fetch("http://localhost:5000/generate-question", {
+            const res = await fetch("https://student-toolkit-balkend.vercel.app/generate-question", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ subject, type: questionType, difficulty }),
@@ -82,7 +82,7 @@ const Quiz = () => {
         }
 
         // Save attempt to DB
-        fetch("http://localhost:5000/quiz-attempts", {
+        fetch("https://student-toolkit-balkend.vercel.app/quiz-attempts", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -99,7 +99,7 @@ const Quiz = () => {
 
             // get attempt from Db
             .then(() =>
-                fetch(`http://localhost:5000/quiz-attempts/${userEmail}`)
+                fetch(`https://student-toolkit-balkend.vercel.app/quiz-attempts/${userEmail}`)
                     .then((res) => res.json())
                     .then((data) => setAttempts(data))
             )
@@ -109,7 +109,7 @@ const Quiz = () => {
     // Clear all history for user
     const clearHistory = async () => {
         if (!userEmail) return;
-        await fetch(`http://localhost:5000/quiz-attempts/clear/${userEmail}`, {
+        await fetch(`https://student-toolkit-balkend.vercel.app/quiz-attempts/clear/${userEmail}`, {
             method: "DELETE",
         });
         setAttempts([]);

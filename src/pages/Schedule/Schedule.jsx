@@ -71,7 +71,7 @@ const Schedule = () => {
     const fetchSchedules = async () => {
         try {
             const res = await axios.get(
-                `http://localhost:5000/email/schedules?email=${user?.email}`
+                `https://student-toolkit-balkend.vercel.app/email/schedules?email=${user?.email}`
             );
             setSchedules(res.data);
         } catch (err) {
@@ -99,11 +99,11 @@ const Schedule = () => {
             if (editingId) {
                 const { _id, ...dataWithoutId } = { ...form, day: dayOfWeek };
                 await axios.put(
-                    `http://localhost:5000/schedules/${editingId}`,
+                    `https://student-toolkit-balkend.vercel.app/schedules/${editingId}`,
                     { ...dataWithoutId, email: user.email }
                 );
             } else {
-                await axios.post("http://localhost:5000/schedules", {
+                await axios.post("https://student-toolkit-balkend.vercel.app/schedules", {
                     ...form,
                     day: dayOfWeek,
                     email: user.email,
@@ -139,7 +139,7 @@ const Schedule = () => {
 
     // handle delete schedule
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:5000/schedules/${id}`);
+        await axios.delete(`https://student-toolkit-balkend.vercel.app/schedules/${id}`);
         fetchSchedules();
     };
 

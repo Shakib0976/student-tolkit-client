@@ -28,7 +28,7 @@ const Budget = () => {
     const fetchTransactions = async () => {
         if (!user?.email) return;
         try {
-            const res = await axios.get(`http://localhost:5000/transactions/${user.email}`);
+            const res = await axios.get(`https://student-toolkit-balkend.vercel.app/transactions/${user.email}`);
             setTransactions(res.data);
 
             const totalIncome = res.data.filter((t) => t.type === "income").reduce((acc, t) => acc + t.amount, 0);
@@ -51,7 +51,7 @@ const Budget = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:5000/transactions", {
+            await axios.post("https://student-toolkit-balkend.vercel.app/transactions", {
                 ...formData,
                 amount: parseFloat(formData.amount),
                 userEmail: user.email,
@@ -92,7 +92,7 @@ const Budget = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`http://localhost:5000/transactions/${id}`);
+                    await axios.delete(`https://student-toolkit-balkend.vercel.app/transactions/${id}`);
                     fetchTransactions();
 
                     Swal.fire({

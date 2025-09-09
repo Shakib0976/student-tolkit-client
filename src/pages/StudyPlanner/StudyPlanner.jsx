@@ -35,7 +35,7 @@ const StudyPlanner = () => {
     const fetchTasks = async () => {
         if (!userEmail) return;
         try {
-            const res = await axios.get(`http://localhost:5000/tasks/${userEmail}`);
+            const res = await axios.get(`https://student-toolkit-balkend.vercel.app/tasks/${userEmail}`);
             setTasks(res.data);
         } catch (err) {
             console.error("Fetch tasks error:", err);
@@ -63,7 +63,7 @@ const StudyPlanner = () => {
         };
 
         try {
-            const res = await axios.post("http://localhost:5000/tasks", newTask);
+            const res = await axios.post("https://student-toolkit-balkend.vercel.app/tasks", newTask);
             setTasks((prev) => [...prev, res.data.insertedId ? { ...newTask, _id: res.data.insertedId } : res.data]);
             setShowModal(false);
             setFormData({
@@ -113,7 +113,7 @@ const StudyPlanner = () => {
             });
 
             if (result.isConfirmed) {
-                await axios.delete(`http://localhost:5000/tasks/${id}`);
+                await axios.delete(`https://student-toolkit-balkend.vercel.app/tasks/${id}`);
                 setTasks(tasks.filter((task) => task._id !== id));
                 MySwal.fire({
                     title: 'Deleted!',
@@ -144,7 +144,7 @@ const StudyPlanner = () => {
     //    mark complete is complete or not
     const markComplete = async (id) => {
         try {
-            await axios.put(`http://localhost:5000/tasks/${id}`, { completed: true });
+            await axios.put(`https://student-toolkit-balkend.vercel.app/tasks/${id}`, { completed: true });
 
         } catch (err) {
             console.error("Error marking complete:", err);
