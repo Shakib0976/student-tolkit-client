@@ -3,6 +3,8 @@ import { Bell, Trash2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { AuthContext } from '../../../Context/AuthContext'
 import toast from "react-hot-toast";
+import swal from "sweetalert";
+
 
 const SmartReminder = () => {
 
@@ -23,6 +25,17 @@ const SmartReminder = () => {
 
     // Add reminder data from DB
     const handleAddReminder = async () => {
+
+        if (!userEmail) {
+            // Show alert if user is not logged in
+            swal("Oops!", "Please log in to add a reminder.", "warning");
+            return;
+        }
+
+        if (!task || !date) {
+            swal("Oops!", "Please fill in both task and date.", "warning");
+            return;
+        }
         if (!task || !date || !userEmail) return;
 
         const newReminder = { email: userEmail, task, date };

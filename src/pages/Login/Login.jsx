@@ -53,7 +53,7 @@ const Login = () => {
             .then((result) => {
                 const user = (result.user);
                 setUser(user)
-                localStorage.setItem('devtalksToken', result?.user?.accessToken);
+                localStorage.setItem('devtalksToken', result?.user);
                 toast.success('Successfully Login')
                 navigate(locations?.state || '/', {
                     state: { toastMessage: 'Login successful!' }

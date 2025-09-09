@@ -135,7 +135,7 @@ const Budget = () => {
                     onClick={() => {
                         // redirect if not logged in
                         if (!user) {
-                            navigate("/login");
+                            navigate("/login", { state: "/budget" });
                         } else {
                             setShowModal(true);
                         }

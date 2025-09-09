@@ -4,6 +4,8 @@ import { format, isThisWeek, parse } from "date-fns";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { FaUser, FaUserCircle, FaShieldAlt, FaRegClock } from "react-icons/fa";
+import { MdLocationPin } from "react-icons/md";
 
 const today = format(new Date(), "eee");
 // const todayFullDate = format(new Date(), "yyyy-MM-dd");
@@ -12,6 +14,7 @@ const Schedule = () => {
 
     // schedules state
     const [schedules, setSchedules] = useState([]);
+    const [loading, setLoading] = useState(true)
     const { user } = use(AuthContext);
     console.log(user?.email);
 
@@ -34,7 +37,21 @@ const Schedule = () => {
     const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 
-    // Category-based styles
+    // main schedule subject color
+    const subjectColors = {
+        Math: "bg-blue-500/20",
+        Physics: "bg-green-500/20",
+        Chemistry: "bg-red-500/20",
+        Biology: "bg-purple-500/20",
+        English: "bg-yellow-500/20",
+        History: "bg-pink-500/20",
+        Default: "bg-gray-300/20", // fallback
+    };
+
+
+
+
+    // Category-based styles for today classes section
     const categoryStyles = {
         Mathematics: {
             card: "bg-blue-50 dark:bg-slate-800 border border-blue-200/80 shadow-sm",
@@ -74,8 +91,10 @@ const Schedule = () => {
                 `https://student-toolkit-balkend.vercel.app/email/schedules?email=${user?.email}`
             );
             setSchedules(res.data);
+            setLoading(false)
         } catch (err) {
             console.error("Error fetching schedules:", err);
+            setLoading(false)
         }
     };
 
@@ -177,7 +196,7 @@ const Schedule = () => {
                     onClick={() => {
                         // redirect if not logged in
                         if (!user) {
-                            navigate("/login");
+                            navigate("/login", { state: "/schedule" });
                         } else {
                             setShowForm(true);
                         }
@@ -225,49 +244,81 @@ const Schedule = () => {
 
             {/* Weekly Schedule */}
             <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
-                {days.map((day) => {
-                    const dayClasses = schedules.filter((s) => s.day === day);
-                    return (
-                        <div key={day} className="bg-white dark:bg-slate-900 rounded-lg shadow p-4">
-                            <h3 className="font-bold text-center mb-2">{day}</h3>
-                            <p className="text-sm text-gray-500 mb-2">
-                                {dayClasses.length} classes
-                            </p>
-                            {dayClasses.length > 0 ? (
-                                dayClasses.map((s) => (
-                                    <div
-                                        key={s._id}
-                                        className="border-l-4 border-purple-400 pl-2 mb-2"
-                                    >
-                                        <p className="font-semibold">{s.subject}</p>
-                                        <p className="text-xs text-gray-600">
-                                            {s.startTime} - {s.endTime}
-                                        </p>
-                                        <p className="text-xs text-gray-600">{s.instructor}</p>
-                                        <p className="text-xs text-gray-600">{s.location}</p>
-                                        <div className="flex gap-2 mt-1">
-                                            <button
-                                                onClick={() => handleEdit(s._id)}
-                                                className="text-yellow-500 text-xs"
-                                            >
-                                                Edit
-                                            </button>
-                                            <button
-                                                onClick={() => handleDelete(s._id)}
-                                                className="text-red-500 text-xs"
-                                            >
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <p className="text-sm text-gray-400 text-center">No classes</p>
-                            )}
+                {loading
+                    ? // Skeleton Loading
+                    days.map((day) => (
+                        <div
+                            key={day}
+                            className="bg-white dark:bg-slate-900 border-1 rounded-lg shadow p-4 animate-pulse "
+                        >
+                            <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2 mx-auto mb-2"></div>
+                            <div className="h-3 bg-gray-200 dark:bg-gray-600 rounded w-1/3 mx-auto mb-4"></div>
+                            <div className="space-y-2">
+                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+                            </div>
                         </div>
-                    );
-                })}
+                    ))
+                    : // Actual schedule
+                    days.map((day) => {
+                        const dayClasses = schedules.filter((s) => s.day === day);
+                        return (
+                            <div
+                                key={day}
+                                className="bg-white dark:bg-slate-900 rounded-lg shadow p-4"
+                            >
+                                <h3 className="font-bold text-center mb-2">{day}</h3>
+                                <p className="text-sm text-gray-500 mb-2">
+                                    {dayClasses.length} classes
+                                </p>
+                                {dayClasses.length > 0 ? (
+                                    dayClasses.map((s) => (
+                                        <div
+                                            key={s._id}
+                                            className={`rounded-lg space-y-1 p-2 mb-2 ${subjectColors[s.subject] || subjectColors.Default
+                                                }`}
+                                        >
+                                            <p className="font-semibold">{s.subject}</p>
+                                            <p className="text-xs flex items-center dark:text-gray-400 text-gray-600">
+                                                <FaRegClock className="mr-1" />  {s.startTime} - {s.endTime}
+                                            </p>
+                                            <p className="text-xs flex items-center dark:text-gray-400 text-gray-600"> <FaUser className="mr-1" />  {s.instructor}</p>
+                                            <p className="text-xs flex items-center dark:text-gray-400 text-gray-600"><MdLocationPin size={15} className="mr-1" /> {s.location}</p>
+                                            <div className="flex gap-2 mt-1">
+                                                <button
+                                                    onClick={() => handleEdit(s._id)}
+                                                    className="text-yellow-500 text-xs"
+                                                >
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDelete(s._id)}
+                                                    className="text-red-500 text-xs"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center p-6 bg-green-50 dark:bg-slate-800 rounded-lg shadow-sm">
+                                        <p className="flex flex-col items-center text-sm font-medium text-gray-500 dark:text-gray-400">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            No schedules
+                                        </p>
+                                        <p className="text-xs text-gray-400 dark:text-gray-500">Add New Class</p>
+                                    </div>
+
+
+                                )}
+                            </div>
+                        );
+                    })}
             </div>
+
 
             {/* Today's Schedule */}
             <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-4">
@@ -294,7 +345,16 @@ const Schedule = () => {
                         })}
                     </div>
                 ) : (
-                    <p className="text-gray-500">No classes scheduled for today 🎉</p>
+                    <div className="p-6 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg text-center">
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                            🎉 Nothing on your schedule
+                        </p>
+                        <p className="text-xs text-gray-400 dark:text-gray-500">
+                            Enjoy your free time today.
+                        </p>
+                    </div>
+
+
                 )}
             </div>
 
