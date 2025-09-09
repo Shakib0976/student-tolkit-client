@@ -55,7 +55,14 @@ const Banner = () => {
                         <Link to={'/schedule'} className="md:px-6 md:py-3 px-3 py-2 flex items-center gap-2 rounded-2xl bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-800 transition">
                             <Rocket /> Get Started
                         </Link>
-                        <button className="md:px-6 md:py-3 px-3 py-2 rounded-2xl bg-white border text-gray-700 font-semibold shadow hover:bg-gray-200 transition">
+                        <button
+                            onClick={() => {
+                                const section = document.getElementById("features");
+                                if (section) {
+                                    section.scrollIntoView({ behavior: "smooth" });
+                                }
+                            }}
+                            className="md:px-6 md:py-3 px-3 py-2 rounded-2xl bg-white border text-gray-700 font-semibold shadow hover:bg-gray-200 transition">
                             👀 Watch Demo
                         </button>
                     </motion.div>

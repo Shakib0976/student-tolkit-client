@@ -16,7 +16,7 @@ const Marque = () => {
     ];
 
     return (
-        <div className="max-w-7xl mx-auto md:px-10 px-5 lg:px-0 ">
+        <div id="features" className="max-w-7xl mx-auto md:px-10 px-5 lg:px-0 ">
             <div className="bg-gray-100 dark:bg-slate-900 py-10  md:py-20 mt-10 mb-20 rounded-2xl text-center shadow-md ">
                 {/* page title */}
                 <h1 className="text-2xl sm:text-3xl md:text-3xl  font-bold mb-4 flex items-center gap-2 justify-center">

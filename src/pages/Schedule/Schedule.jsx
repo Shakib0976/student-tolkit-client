@@ -160,6 +160,7 @@ const Schedule = () => {
     const handleDelete = async (id) => {
         await axios.delete(`https://student-toolkit-balkend.vercel.app/schedules/${id}`);
         fetchSchedules();
+        toast.success('Schedule Delete Success')
     };
 
     const todaySchedules = schedules.filter((s) => s.day === today);
@@ -382,7 +383,7 @@ const Schedule = () => {
                                 <input
                                     type="text"
                                     name="subject"
-                                    placeholder="enter subject name"
+                                    placeholder="enter subject name e.g. Math"
                                     value={form.subject}
                                     onChange={handleChange}
                                     required
