@@ -102,7 +102,7 @@ const FeatureHighlights = () => {
 
                             <div className="mt-8">
                                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                                <p className="text-gray-600 dark:text-gray-200 mb-4">{feature.description}</p>
+                                <p className="text-gray-600 dark:text-gray-300 mb-4">{feature.description}</p>
                                 <div className="border-t-2 my-4"></div>
 
 

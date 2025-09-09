@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import studentImg from "../../../assets/joyful-schoolboy-with-heavy-backpack-removebg-preview.png";
 
 const StudentBenefits = () => {
+    // benefits card view data
     const benefits = [
         {
             icon: <Calendar className="w-8 h-8 text-blue-600" />,
@@ -52,11 +53,11 @@ const StudentBenefits = () => {
             <div className="text-center mb-8 px-4 sm:px-6 md:px-10">
                 <div className="flex  gap-3 items-center justify-center md:gap-4 mb-4">
                     <GraduationCap className="w-12 h-12 text-blue-600 mb-2 md:mb-0" />
-                    <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold text-gray-800">
+                    <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold dark:text-gray-100 text-gray-800">
                         Discover the Benefits
                     </h2>
                 </div>
-                <p className="text-gray-600 max-w-xl mx-auto text-sm sm:text-base md:text-lg">
+                <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-sm sm:text-base md:text-lg">
                     Unlock tools, resources, and tips designed to help students manage their studies, stay organized, and make the most of campus life.
                 </p>
             </div>
@@ -91,12 +92,12 @@ const StudentBenefits = () => {
                                 variants={itemVariants}
                                 className="flex items-start gap-4"
                             >
-                                <div className="p-2 bg-white rounded-lg shadow">{benefit.icon}</div>
+                                <div className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow">{benefit.icon}</div>
                                 <div>
-                                    <h3 className="font-semibold text-gray-800 text-lg">
+                                    <h3 className="font-semibold dark:text-gray-100 text-gray-800 text-lg">
                                         {benefit.title}
                                     </h3>
-                                    <p className="text-gray-600 text-sm">{benefit.description}</p>
+                                    <p className="text-gray-600 dark:text-gray-300 text-sm">{benefit.description}</p>
                                 </div>
                             </motion.div>
                         ))}
