@@ -187,7 +187,18 @@ const FocusTimer = () => {
             {/* Recent Sessions */}
             <div className="bg-white dark:bg-slate-900 p-4 rounded shadow mt-6">
                 <h2 className="font-semibold mb-2">Recent Sessions</h2>
-                <p className="text-gray-500">No sessions yet. Start your first focus session!</p>
+                <div className="flex flex-col items-center justify-center py-16 bg-gray-50 dark:bg-gray-800 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl">
+                    <div className="text-6xl mb-4 text-purple-500 animate-bounce">
+                        ⏱
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                        No Focus Sessions Yet
+                    </h3>
+                    <p className="text-gray-500 dark:text-gray-400 text-center max-w-xs">
+                        Start your first focus session and track your productivity efficiently.
+                    </p>
+                </div>
+
             </div>
         </div>
     );
