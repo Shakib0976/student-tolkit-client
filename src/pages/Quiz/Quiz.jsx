@@ -121,7 +121,7 @@ const Quiz = () => {
     const totalWrongByDb = attempts.filter(a => a.result === "wrong").length;
 
     return (
-        <div className="p-6 max-w-7xl mx-auto bg-[#F8F7FD] min-h-screen">
+        <div className="p-6 max-w-7xl mx-auto min-h-screen">
             <h1 className=" text-2xl md:text-3xl font-bold text-purple-600 ">
                 Exam Q&A Generator
             </h1>
@@ -130,7 +130,7 @@ const Quiz = () => {
             </p>
 
             {/* Question Settings  section*/}
-            <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+            <div className="bg-white dark:bg-slate-900 shadow-md rounded-lg p-6 mb-6">
                 <h3 className="text-lg font-semibold mb-4">Question Settings</h3>
                 <div className="md:flex space-y-3 md:space-x-6">
                     {/* Subject */}
@@ -202,7 +202,7 @@ const Quiz = () => {
             </div>
 
             {/* Question + Stats */}
-            <div className="flex flex-col lg:flex-row bg-white shadow-lg rounded-2xl p-6 gap-6">
+            <div className="flex flex-col lg:flex-row bg-white dark:bg-slate-900 shadow-lg rounded-2xl p-6 gap-6">
                 {/* Question Area */}
                 <div className="flex-1">
                     {loading && (
@@ -240,7 +240,7 @@ const Quiz = () => {
                                 <FaRobot />
                                 <span className="font-semibold">AI:</span>
                             </div>
-                            <p className="bg-gray-100 px-4 py-3 rounded-lg text-gray-800 shadow-sm">
+                            <p className="bg-gray-100  dark:bg-slate-300 px-4 py-3 rounded-lg text-gray-800 shadow-sm">
                                 {msg.content}
                             </p>
                             {msg.options && (
@@ -253,9 +253,9 @@ const Quiz = () => {
                                             className={`px-4 py-2 rounded-lg text-left border transition shadow-sm
                                                      ${selectedAnswer === opt
                                                     ? selectedCorrectAns
-                                                        ? "bg-green-100 border-green-500"
-                                                        : "bg-red-100 border-red-500"
-                                                    : "hover:bg-gray-50"
+                                                        ? "bg-green-100 dark:bg-green-950 border-green-500"
+                                                        : "bg-red-100 border-red-500 dark:bg-red-950"
+                                                    : "hover:bg-gray-50 dark:hover:dark:bg-gray-600"
                                                 }`}
                                         >
                                             {opt}
@@ -337,7 +337,7 @@ const Quiz = () => {
             </div>
 
             {/* Quiz History  section*/}
-            <div className="mt-10 bg-white shadow-lg rounded-lg p-6">
+            <div className="mt-10 bg-white dark:bg-slate-900 shadow-lg rounded-lg p-6">
                 <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-bold">Your Quiz History</h3>
                     {attempts.length > 0 && (

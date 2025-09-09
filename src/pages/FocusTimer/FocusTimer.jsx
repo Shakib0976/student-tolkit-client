@@ -76,7 +76,7 @@ const FocusTimer = () => {
     };
 
     return (
-        <div className="p-6 max-w-7xl mx-auto bg-[#F8F7FD] min-h-screen">
+        <div className="p-6 max-w-7xl mx-auto min-h-screen">
             {/* Audio Elements  with timer start adn end based*/}
             <audio ref={tickRef} src={tickSound} />
             <audio ref={beepRef} src={beepSound} />
@@ -87,26 +87,26 @@ const FocusTimer = () => {
 
             {/* Stats with timer based */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white  dark:bg-slate-900 p-4 rounded shadow">
                     <p className="text-gray-500">Total Points</p>
                     <p className="text-2xl font-bold text-yellow-500">{totalPoints}</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4  dark:bg-slate-900 rounded shadow">
                     <p className="text-gray-500">Current Streak</p>
                     <p className="text-2xl font-bold text-orange-500">{streak} days</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4  dark:bg-slate-900 rounded shadow">
                     <p className="text-gray-500">Today's Sessions</p>
                     <p className="text-2xl font-bold text-blue-500">{sessions}</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4  dark:bg-slate-900 rounded shadow">
                     <p className="text-gray-500">Level</p>
                     <p className="text-2xl font-bold text-purple-500">{level}</p>
                 </div>
             </div>
 
             {/* Timer Card */}
-            <div className="bg-white rounded-lg shadow p-6 relative flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="bg-white  dark:bg-slate-900 rounded-lg shadow p-6 relative flex flex-col md:flex-row items-center justify-between gap-6">
                 {/* Sound Icon Top-left */}
                 <button
                     onClick={() => setSoundOn(prev => !prev)}
@@ -143,7 +143,7 @@ const FocusTimer = () => {
                     <div>
                         <label className="block text-gray-500 mb-1">Duration</label>
                         <select
-                            className="w-full border border-gray-300 rounded px-3 py-2"
+                            className="w-full dark:bg-slate-900 border border-gray-300 rounded px-3 py-2"
                             value={duration}
                             onChange={e => setDuration(Number(e.target.value))}
                         >
@@ -157,7 +157,7 @@ const FocusTimer = () => {
                     <div>
                         <label className="block text-gray-500 mb-1">Subject</label>
                         <select
-                            className="w-full border border-gray-300 rounded px-3 py-2"
+                            className="w-full border dark:bg-slate-900 border-gray-300 rounded px-3 py-2"
                             value={subject}
                             onChange={e => setSubject(e.target.value)}
                         >
@@ -173,19 +173,19 @@ const FocusTimer = () => {
 
             {/* Achievements */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                <div className="bg-yellow-100 p-4 rounded shadow">
+                <div className="bg-yellow-100  dark:bg-green-950 p-4 rounded shadow">
                     <p className="font-semibold flex gap-2"><FaFire className="text-orange-500 text-2xl" />
                         Fire Streak!</p>
                     <p className="text-gray-500">7 days in a row</p>
                 </div>
-                <div className="bg-purple-100 p-4 rounded shadow">
+                <div className="bg-purple-100 dark:bg-purple-950 p-4 rounded shadow">
                     <p className="font-semibold flex gap-2"><GiArcheryTarget className="text-pink-500 text-2xl" /> Focus Master</p>
                     <p className="text-gray-500">25 sessions completed</p>
                 </div>
             </div>
 
             {/* Recent Sessions */}
-            <div className="bg-white p-4 rounded shadow mt-6">
+            <div className="bg-white dark:bg-slate-900 p-4 rounded shadow mt-6">
                 <h2 className="font-semibold mb-2">Recent Sessions</h2>
                 <p className="text-gray-500">No sessions yet. Start your first focus session!</p>
             </div>

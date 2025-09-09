@@ -11,7 +11,7 @@ const Register = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [error, setError] = useState('');
-    
+
 
     // register user
     const handleCreateUser = async (e) => {
@@ -62,7 +62,7 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen  flex flex-col items-center justify-center px-4 py-8 bg-gray-50 dark:bg-black ">
+        <div className="min-h-screen  flex flex-col items-center justify-center px-4 py-8 ">
 
             <div className="w-full max-w-md p-8 lg:mt-8  rounded-2xl shadow-[0_0_5px_rgba(110,69,226,0.5),_0_0_10px_rgba(136,211,206,0.3)] bg-gradient-to-br  bg-white dark:bg-transparent border border-gray-200 dark:border-gray-700">
 
@@ -73,10 +73,10 @@ const Register = () => {
                 <h1 className="space-grotesk-500 mb-3 text-xl sm:text-2xl md:text-3xl font-bold text-center mt-2">
                     Sign up your account
                 </h1>
-    
 
 
-                    {/* register form */}
+
+                {/* register form */}
                 <form onSubmit={handleCreateUser} className="space-y-2">
                     <div>
                         <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">Name</label>
@@ -127,9 +127,9 @@ const Register = () => {
                         Sign Up
                     </button>
                 </form>
-                 
 
-                 {/* login navigation link */}
+
+                {/* login navigation link */}
                 <p className="text-center text-sm text-gray-600 dark:text-gray-300 mt-4">
                     Already have an account?{' '}
                     <Link to="/login" className="text-blue-600 hover:underline">
@@ -143,7 +143,7 @@ const Register = () => {
 
 
 
-              {/* google login button */}
+                {/* google login button */}
                 <button
                     onClick={handleSigninGoogle}
                     className="w-full flex  items-center justify-center gap-2 py-3 bg-white border border-gray-300 dark:text-black dark:border-gray-600 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 text-sm font-medium transition"

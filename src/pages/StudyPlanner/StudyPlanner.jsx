@@ -182,7 +182,7 @@ const StudyPlanner = () => {
     };
 
     return (
-        <div className="p-6 bg-[#F8F7FD] min-h-screen max-w-7xl mx-auto">
+        <div className="p-6  min-h-screen max-w-7xl mx-auto">
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <div>
@@ -190,7 +190,7 @@ const StudyPlanner = () => {
                     <p className="text-gray-500">Break down your study goals into manageable tasks</p>
                 </div>
                 <button
-                    className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+                    className="bg-purple-600 text-white  px-4 py-2 rounded hover:bg-purple-700"
                     onClick={() => {
                         // redirect if not logged in
                         if (!user) {
@@ -208,19 +208,19 @@ const StudyPlanner = () => {
 
             {/* Summary */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white dark:bg-slate-900 p-4 rounded shadow">
                     <p className="text-gray-500">Total Tasks</p>
                     <p className="text-2xl font-bold">{totalTasks}</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4 dark:bg-slate-900 rounded shadow">
                     <p className="text-gray-500">Completed</p>
                     <p className="text-2xl font-bold text-green-500">{completedTasks}</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4 dark:bg-slate-900 rounded shadow">
                     <p className="text-gray-500">Pending</p>
                     <p className="text-2xl font-bold text-yellow-500">{pendingTasks}</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4 dark:bg-slate-900 rounded shadow">
                     <p className="text-gray-500">Study Hours</p>
                     <p className="text-2xl font-bold text-blue-500">{studyHours}h</p>
                 </div>
@@ -232,7 +232,7 @@ const StudyPlanner = () => {
                     <button
                         key={f}
                         onClick={() => setFilter(f)}
-                        className={`px-4 py-1 rounded ${filter === f ? "bg-purple-600 text-white" : "bg-white border"}`}
+                        className={`px-4 py-1 rounded ${filter === f ? "bg-purple-600 text-white" : "bg-white dark:bg-slate-600 border"}`}
                     >
                         {f}
                     </button>
@@ -250,7 +250,7 @@ const StudyPlanner = () => {
                     filteredTasks.map((task) => (
                         <div
                             key={task._id}
-                            className="bg-white p-4 rounded shadow flex flex-col md:flex-row justify-between items-start md:items-center"
+                            className="bg-white dark:bg-slate-900 p-4 rounded shadow flex flex-col md:flex-row justify-between items-start md:items-center"
                         >
                             <div className="flex flex-col">
                                 <h3 className={`font-semibold ${task.completed ? "line-through text-gray-400" : ""}`}>
@@ -296,29 +296,35 @@ const StudyPlanner = () => {
             {/* Add Task Modal */}
             {showModal && (
                 <div className="modal modal-open pt-5">
-                    <div className="modal-box w-11/12 max-w-lg">
-                        <button className="absolute top-3 right-3 text-2xl text-gray-500 hover:text-gray-800" onClick={() => setShowModal(false)}>
+                    <div className="modal-box w-11/12 max-w-lg dark:bg-slate-900">
+                        <button className="absolute top-3 right-3 text-2xl  text-gray-500 hover:text-gray-800" onClick={() => setShowModal(false)}>
                             &times;
                         </button>
-                        <h2 className="text-2xl font-bold mb-4 text-gray-800">Add New Study Task</h2>
+                        <h2 className="text-2xl font-bold mb-4 dark:text-gray-100 text-gray-800">Add New Study Task</h2>
                         <form className="space-y-4" onSubmit={handleSubmit}>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Task Title *</label>
-                                <input type="text" className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.taskTitle} onChange={(e) => setFormData({ ...formData, taskTitle: e.target.value })} required />
+                                <label className="block text-sm font-medium dark:text-gray-300 text-gray-700">Task Title *</label>
+                                <input
+                                    type="text"
+                                    placeholder="type task title"
+                                    className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.taskTitle} onChange={(e) => setFormData({ ...formData, taskTitle: e.target.value })} required />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Subject *</label>
-                                <select className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} required>
+                                <label className="block text-sm font-medium dark:text-gray-300 text-gray-700">Subject *</label>
+                                <select
+                                    className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} required>
                                     <option value="" disabled>Select subject</option>
                                     {subjects.map((sub) => <option key={sub} value={sub}>{sub}</option>)}
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Description</label>
-                                <textarea className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" rows="3" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })}></textarea>
+                                <label className="block text-sm font-medium dark:text-gray-300 text-gray-700">Description</label>
+                                <textarea
+                                    className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" rows="3"
+                                    placeholder="type task description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })}></textarea>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Priority Level</label>
+                                <label className="block text-sm font-medium dark:text-gray-300 text-gray-700">Priority Level</label>
                                 <select className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.priority} onChange={(e) => setFormData({ ...formData, priority: e.target.value })}>
                                     <option>Low</option>
                                     <option>Medium</option>
@@ -326,12 +332,14 @@ const StudyPlanner = () => {
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Deadline *</label>
-                                <input type="date" className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.deadline} onChange={(e) => setFormData({ ...formData, deadline: e.target.value })} required />
+                                <label className="block text-sm font-medium dark:text-gray-300 text-gray-700">Deadline *</label>
+                                <input type="date"
+                                    className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.deadline} onChange={(e) => setFormData({ ...formData, deadline: e.target.value })} required />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Estimated Hours</label>
-                                <input type="number" min="1" className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.estimatedHours} onChange={(e) => setFormData({ ...formData, estimatedHours: e.target.value })} />
+                                <label className="block text-sm font-medium dark:text-gray-300 text-gray-700">Estimated Hours</label>
+                                <input type="number" min="1"
+                                    className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2" value={formData.estimatedHours} onChange={(e) => setFormData({ ...formData, estimatedHours: e.target.value })} />
                             </div>
                             <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Add Task</button>
                         </form>

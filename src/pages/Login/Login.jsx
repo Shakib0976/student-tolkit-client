@@ -70,7 +70,7 @@ const Login = () => {
 
     }
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center lg:mx-20 px-4 bg-gray-50 dark:bg-black">
+        <div className="min-h-screen flex flex-col items-center justify-center lg:mx-20 px-4 ">
 
 
             {/* login section */}

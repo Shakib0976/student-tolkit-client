@@ -37,28 +37,28 @@ const Schedule = () => {
     // Category-based styles
     const categoryStyles = {
         Mathematics: {
-            card: "bg-blue-50 border border-blue-200/80 shadow-sm",
-            subjectText: "text-blue-600",
-            timeText: "text-blue-900/90",
-            locationText: "text-blue-900/70",
+            card: "bg-blue-50 dark:bg-slate-800 border border-blue-200/80 shadow-sm",
+            subjectText: "text-blue-600 dark:text-gray-100",
+            timeText: "text-blue-900/90 dark:text-gray-400",
+            locationText: "text-blue-900/70 dark:text-gray-400",
         },
         Biology: {
-            card: "bg-green-50 border border-green-200/80 shadow-sm",
-            subjectText: "text-green-600",
-            timeText: "text-green-900/90",
-            locationText: "text-green-900/70",
+            card: "bg-green-50 border dark:bg-slate-800 border-green-200/80 shadow-sm",
+            subjectText: "text-green-600 dark:text-gray-100",
+            timeText: "text-green-900/90 dark:text-gray-400",
+            locationText: "text-green-900/70 dark:text-gray-400",
         },
         English: {
-            card: "bg-purple-50 border border-purple-200/80 shadow-sm",
-            subjectText: "text-purple-600",
-            timeText: "text-purple-900/90",
-            locationText: "text-purple-900/70",
+            card: "bg-purple-50 border dark:bg-slate-800 border-purple-200/80 shadow-sm",
+            subjectText: "text-purple-600 dark:text-gray-100",
+            timeText: "text-purple-900/90 dark:text-gray-400",
+            locationText: "text-purple-900/70 dark:text-gray-400",
         },
         default: {
-            card: "bg-purple-50 border border-gray-200/80 shadow-sm",
-            subjectText: "text-gray-600",
-            timeText: "text-gray-900/90",
-            locationText: "text-gray-900/70",
+            card: "bg-purple-50 border dark:bg-slate-800 border-gray-200/80 shadow-sm",
+            subjectText: "text-gray-600 dark:text-gray-100 ",
+            timeText: "text-gray-900/90 dark:text-gray-400",
+            locationText: "text-gray-900/70 dark:text-gray-400",
         },
     };
 
@@ -171,7 +171,7 @@ const Schedule = () => {
             <div className="flex justify-between items-center mb-4">
                 <div>
                     <h1 className="text-2xl font-bold text-purple-600">Class Schedule</h1>
-                    <p className="text-gray-500">Manage your weekly class timetable</p>
+                    <p className="text-gray-500 dark:text-gray-400">Manage your weekly class timetable</p>
                 </div>
                 <button
                     onClick={() => {
@@ -191,21 +191,21 @@ const Schedule = () => {
 
             {/* --- Stats Cards --- */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white p-4 rounded-lg shadow flex items-center justify-between">
+                <div className="bg-white dark:bg-slate-900 p-4 rounded-lg shadow flex items-center justify-between">
                     <div>
                         <p className="text-gray-500">Total Classes</p>
                         <p className="text-2xl font-bold">{totalClasses}</p>
                     </div>
                     <span className="text-blue-500 text-2xl">📅</span>
                 </div>
-                <div className="bg-white p-4 rounded-lg shadow flex items-center justify-between">
+                <div className="bg-white dark:bg-slate-900 p-4 rounded-lg shadow flex items-center justify-between">
                     <div>
                         <p className="text-gray-500">Today's Classes</p>
                         <p className="text-2xl font-bold">{todaysClasses}</p>
                     </div>
                     <span className="text-green-500 text-2xl">⏰</span>
                 </div>
-                <div className="bg-white p-4 rounded-lg shadow flex items-center justify-between">
+                <div className="bg-white p-4 dark:bg-slate-900 rounded-lg shadow flex items-center justify-between">
                     <div>
                         <p className="text-gray-500">Next Class</p>
                         <p className="text-lg font-bold text-orange-500">
@@ -214,7 +214,7 @@ const Schedule = () => {
                     </div>
                     <span className="text-orange-500 text-2xl">📍</span>
                 </div>
-                <div className="bg-white p-4 rounded-lg shadow flex items-center justify-between">
+                <div className="bg-white dark:bg-slate-900 p-4 rounded-lg shadow flex items-center justify-between">
                     <div>
                         <p className="text-gray-500">This Week</p>
                         <p className="text-2xl font-bold">{thisWeekClasses}</p>
@@ -228,7 +228,7 @@ const Schedule = () => {
                 {days.map((day) => {
                     const dayClasses = schedules.filter((s) => s.day === day);
                     return (
-                        <div key={day} className="bg-white rounded-lg shadow p-4">
+                        <div key={day} className="bg-white dark:bg-slate-900 rounded-lg shadow p-4">
                             <h3 className="font-bold text-center mb-2">{day}</h3>
                             <p className="text-sm text-gray-500 mb-2">
                                 {dayClasses.length} classes
@@ -270,7 +270,7 @@ const Schedule = () => {
             </div>
 
             {/* Today's Schedule */}
-            <div className="bg-white rounded-lg shadow p-4">
+            <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-4">
                 <h2 className="text-lg font-bold mb-4">
                     📌 Today's Schedule ({today})
                 </h2>
@@ -300,8 +300,8 @@ const Schedule = () => {
 
             {/* Add/Edit Form Modal */}
             {showForm && (
-                <div className="modal modal-open">
-                    <div className="modal-box w-11/12 max-w-lg">
+                <div className="modal modal-open ">
+                    <div className="modal-box w-11/12 max-w-lg dark:bg-slate-900">
                         {/* Header */}
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-lg font-bold">
@@ -322,10 +322,11 @@ const Schedule = () => {
                                 <input
                                     type="text"
                                     name="subject"
+                                    placeholder="enter subject name"
                                     value={form.subject}
                                     onChange={handleChange}
                                     required
-                                    className="input input-bordered w-full"
+                                    className="input dark:bg-slate-800 input-bordered w-full"
                                 />
                             </div>
 
@@ -335,8 +336,9 @@ const Schedule = () => {
                                     type="text"
                                     name="instructor"
                                     value={form.instructor}
+                                    placeholder="enter your instructor name"
                                     onChange={handleChange}
-                                    className="input input-bordered w-full"
+                                    className="input dark:bg-slate-800 input-bordered w-full"
                                 />
                             </div>
 
@@ -349,7 +351,7 @@ const Schedule = () => {
                                         value={form.startTime}
                                         onChange={handleChange}
                                         required
-                                        className="input input-bordered w-full"
+                                        className="input dark:bg-slate-800 input-bordered w-full"
                                     />
                                     <input
                                         type="time"
@@ -357,7 +359,7 @@ const Schedule = () => {
                                         value={form.endTime}
                                         onChange={handleChange}
                                         required
-                                        className="input input-bordered w-full"
+                                        className="input dark:bg-slate-800 input-bordered w-full"
                                     />
                                 </div>
                             </div>
@@ -370,7 +372,7 @@ const Schedule = () => {
                                     value={form.date}
                                     onChange={handleChange}
                                     required
-                                    className="input input-bordered w-full"
+                                    className="input dark:bg-slate-800 input-bordered w-full"
                                 />
                             </div>
 
@@ -380,8 +382,9 @@ const Schedule = () => {
                                     type="text"
                                     name="location"
                                     value={form.location}
+                                    placeholder="enter your class Room no "
                                     onChange={handleChange}
-                                    className="input input-bordered w-full"
+                                    className="input  dark:bg-slate-800 input-bordered w-full"
                                 />
                             </div>
 
@@ -391,8 +394,9 @@ const Schedule = () => {
                                     type="text"
                                     name="category"
                                     value={form.category}
+                                    placeholder="enter your class type category"
                                     onChange={handleChange}
-                                    className="input input-bordered w-full"
+                                    className="input dark:bg-slate-800 input-bordered w-full"
                                 />
                             </div>
 

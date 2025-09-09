@@ -125,12 +125,12 @@ const Budget = () => {
             <div className="flex justify-between items-center">
                 <div>
                     <h1 className=" text-2xl md:text-3xl font-bold text-purple-600">Budget Tracker</h1>
-                    <p className="text-gray-500">Keep track of your income and expenses</p>
+                    <p className="text-gray-500 dark:text-gray-300">Keep track of your income and expenses</p>
                 </div>
 
                 {/* this button budget added if user not available then navigate login page */}
                 <button
-                    className="bg-purple-600 text-white md:px-4 py-2 rounded hover:bg-purple-700"
+                    className="bg-purple-600  text-white md:px-4 py-2 rounded hover:bg-purple-700"
 
                     onClick={() => {
                         // redirect if not logged in
@@ -149,7 +149,7 @@ const Budget = () => {
             {/* Add Transaction Modal */}
             {showModal && (
                 <div className="modal pt-5 modal-open">
-                    <div className="modal-box w-11/12 max-w-lg">
+                    <div className="modal-box w-11/12 max-w-lg dark:bg-gray-900">
                         {/* Header */}
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-lg font-bold">Add New Transaction</h2>
@@ -171,7 +171,7 @@ const Budget = () => {
                                     onChange={(e) =>
                                         setFormData({ ...formData, type: e.target.value })
                                     }
-                                    className="select select-bordered w-full"
+                                    className="select select-bordered w-full dark:bg-gray-800"
                                 >
                                     <option value="income">Income</option>
                                     <option value="expense">Expense</option>
@@ -185,11 +185,12 @@ const Budget = () => {
                                     step="0.01"
                                     name="amount"
                                     value={formData.amount}
+                                    placeholder="type amount"
                                     onChange={(e) =>
                                         setFormData({ ...formData, amount: e.target.value })
                                     }
                                     required
-                                    className="input input-bordered w-full"
+                                    className="input dark:bg-gray-800 input-bordered w-full"
                                 />
                             </div>
 
@@ -198,12 +199,13 @@ const Budget = () => {
                                 <input
                                     type="text"
                                     name="category"
+                                    placeholder="type transaction category"
                                     value={formData.category}
                                     onChange={(e) =>
                                         setFormData({ ...formData, category: e.target.value })
                                     }
                                     required
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered dark:bg-gray-800 w-full"
                                 />
                             </div>
 
@@ -212,11 +214,12 @@ const Budget = () => {
                                 <input
                                     type="text"
                                     name="description"
+                                    placeholder="type transaction description"
                                     value={formData.description}
                                     onChange={(e) =>
                                         setFormData({ ...formData, description: e.target.value })
                                     }
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered dark:bg-gray-800 w-full"
                                 />
                             </div>
 
@@ -230,7 +233,7 @@ const Budget = () => {
                                         setFormData({ ...formData, date: e.target.value })
                                     }
                                     required
-                                    className="input input-bordered w-full"
+                                    className="input input-bordered dark:bg-gray-800 w-full"
                                 />
                             </div>
 
@@ -248,15 +251,15 @@ const Budget = () => {
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white shadow rounded p-4">
+                <div className="bg-white dark:bg-slate-900 shadow rounded p-4">
                     <p className="text-gray-500">Total Income</p>
                     <p className="text-green-500 text-2xl font-bold">${income.toFixed(2)}</p>
                 </div>
-                <div className="bg-white shadow rounded p-4">
+                <div className="bg-white dark:bg-slate-900 shadow rounded p-4">
                     <p className="text-gray-500">Total Expenses</p>
                     <p className="text-red-500 text-2xl font-bold">${expense.toFixed(2)}</p>
                 </div>
-                <div className="bg-white shadow rounded p-4">
+                <div className="bg-white dark:bg-slate-900 shadow rounded p-4">
                     <p className="text-gray-500">Remaining</p>
                     <p className="text-green-500 text-2xl font-bold">${balance.toFixed(2)}</p>
                     <div className="w-full bg-purple-200 h-2 rounded-full mt-2">
@@ -269,7 +272,7 @@ const Budget = () => {
             </div>
 
             {/* Spending by Category */}
-            <div className="bg-white shadow rounded p-4">
+            <div className="bg-white dark:bg-slate-900 shadow rounded p-4">
                 <h2 className="text-xl font-semibold mb-4">Spending by Category</h2>
                 {Object.keys(categories).length === 0 && <p className="text-gray-500">No expenses yet</p>}
                 {Object.entries(categories).map(([cat, amt]) => (
@@ -294,7 +297,7 @@ const Budget = () => {
             </div>
 
             {/* Recent Transactions */}
-            <div className="bg-white shadow rounded p-4">
+            <div className="bg-white dark:bg-slate-900 shadow rounded p-4">
                 <h2 className="text-xl font-semibold mb-4">Recent Transactions</h2>
                 <ul className="space-y-3">
                     {transactions.map((t) => (
