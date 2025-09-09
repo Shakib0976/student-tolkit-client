@@ -77,12 +77,12 @@ const FeatureHighlights = () => {
     }, []);
 
     return (
-        <section className="py-16  mt-10 bg-gradient-to-r from-purple-50 to-blue-50">
+        <section className="py-16  mt-10 bg-gradient-to-r  from-purple-50 to-blue-50 dark:bg-slate-950 dark:bg-none">
             <div className="container max-w-7xl mx-auto px-6">
                 <h2 className="text-3xl font-bold mb-4 text-center">
                     🏆 Feature Highlights
                 </h2>
-                <p className="text-gray-600 md:mb-20 mb-12 text-center">
+                <p className="text-gray-600 dark:text-gray-400 md:mb-20 mb-12 text-center">
                     Make your student life organized, stress-free, and productive!
                 </p>
 
@@ -91,7 +91,7 @@ const FeatureHighlights = () => {
                         <div
                             data-aos="fade-up"
                             key={index}
-                            className="relative bg-white py-6 px-6 rounded-3xl shadow-lg hover:shadow-2xl transition"
+                            className="relative bg-white dark:bg-slate-900 py-6 px-6 rounded-3xl shadow-lg hover:shadow-2xl transition"
                         >
                             {/* card icon */}
                             <div
@@ -102,7 +102,7 @@ const FeatureHighlights = () => {
 
                             <div className="mt-8">
                                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                                <p className="text-gray-600 mb-4">{feature.description}</p>
+                                <p className="text-gray-600 dark:text-gray-200 mb-4">{feature.description}</p>
                                 <div className="border-t-2 my-4"></div>
 
 
