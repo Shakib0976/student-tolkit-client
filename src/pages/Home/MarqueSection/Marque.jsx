@@ -16,31 +16,33 @@ const Marque = () => {
     ];
 
     return (
-        <div className="bg-gray-50 py-10  md:py-20 mt-10 mx-5 mb-20 rounded-2xl px-6 text-center shadow-md max-w-7xl md:mx-auto">
-            {/* page title */}
-            <h1 className="text-2xl sm:text-3xl md:text-3xl  font-bold mb-4 flex items-center gap-2 justify-center">
-                <Star className="w-8 h-8 hidden md:block text-yellow-500  " />  Explore Our Featured Highlights
-            </h1>
-            {/* Page Description */}
-            <p className="text-gray-600 text-center  text-base  md:text-lg mb-10 md:mb-20 px-4 md:px-0 max-w-3xl  mx-auto">
-                Discover some of the most inspiring visuals and concepts we’ve handpicked for you.
-            </p>
+        <div className="max-w-7xl mx-auto md:px-10 px-5 lg:px-0 ">
+            <div className="bg-gray-100 dark:bg-slate-900 py-10  md:py-20 mt-10 mb-20 rounded-2xl text-center shadow-md ">
+                {/* page title */}
+                <h1 className="text-2xl sm:text-3xl md:text-3xl  font-bold mb-4 flex items-center gap-2 justify-center">
+                    <Star className="w-8 h-8 mb-8 md:mb-0 text-yellow-500  " />  Explore Our Featured <br className="md:hidden" />Highlights
+                </h1>
+                {/* Page Description */}
+                <p className="text-gray-600 dark:text-gray-400 text-center  text-base  md:text-lg mb-10 md:mb-20 px-4 md:px-0 max-w-3xl  mx-auto">
+                    Discover some of the most inspiring visuals and concepts we’ve handpicked for you.
+                </p>
 
-            {/* use react marquee for feature show  */}
-            <Marquee pauseOnHover={true} speed={50} gradient={false}>
-                {images.map((src, index) => (
-                    <div
-                        key={index}
-                        className="mx-6 flex items-center justify-center"
-                    >
-                        <img
-                            src={src}
-                            alt={`marquee-${index}`}
-                            className="w-40 h-40 object-cover rounded-xl shadow hover:scale-105 transition-transform duration-300"
-                        />
-                    </div>
-                ))}
-            </Marquee>
+                {/* use react marquee for feature show  */}
+                <Marquee pauseOnHover={true} speed={50} gradient={false}>
+                    {images.map((src, index) => (
+                        <div
+                            key={index}
+                            className="mx-6 flex items-center justify-center"
+                        >
+                            <img
+                                src={src}
+                                alt={`marquee-${index}`}
+                                className="lg:w-50 lg:h-50 md:w-40 md:h-40  h-30 w-30 object-cover rounded-xl shadow hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                    ))}
+                </Marquee>
+            </div>
         </div>
     );
 };
